@@ -1,0 +1,14 @@
+----------------- Options ---------------
+                   GPU_no: 0                             
+                  GPU_num: 1                             
+               batch_size: 8                             
+                loss_func: MSE                           
+                     lr_s: 0.001                         
+              model_depth: 34                            
+                 n_epochs: 200                           
+                   n_exps: 1                             
+                     note:                               
+                  parsave: /public/bme/home/zhaonan/brain_age_est/codes/BRAIN_AGE_ESTIMATION_CONFERENCE/OUTPUT/threedim_3view_GAF-20230811-153250	[default: None]
+              pretrain_3D: False                         
+                     wd_s: 0.0001                        
+----------------- End -------------------

@@ -1,0 +1,125 @@
+2023-10-10 15:16:54,372 sMRI, param size = 2.883 MB
+2023-10-10 15:17:20,906 ******* Epoch 1, Train CE Loss 0.59, Test CE Loss 0.53, Train ACC 0.71, Test ACC 0.80 *******
+2023-10-10 15:17:46,465 ******* Epoch 2, Train CE Loss 0.49, Test CE Loss 0.57, Train ACC 0.82, Test ACC 0.69 *******
+2023-10-10 15:18:11,079 ******* Epoch 3, Train CE Loss 0.46, Test CE Loss 0.48, Train ACC 0.86, Test ACC 0.83 *******
+2023-10-10 15:18:37,210 ******* Epoch 4, Train CE Loss 0.43, Test CE Loss 0.49, Train ACC 0.87, Test ACC 0.80 *******
+2023-10-10 15:19:01,957 ******* Epoch 5, Train CE Loss 0.40, Test CE Loss 0.49, Train ACC 0.90, Test ACC 0.81 *******
+2023-10-10 15:19:27,379 ******* Epoch 6, Train CE Loss 0.42, Test CE Loss 0.47, Train ACC 0.90, Test ACC 0.85 *******
+2023-10-10 15:19:51,799 ******* Epoch 7, Train CE Loss 0.44, Test CE Loss 0.45, Train ACC 0.87, Test ACC 0.89 *******
+2023-10-10 15:20:16,717 ******* Epoch 8, Train CE Loss 0.40, Test CE Loss 0.50, Train ACC 0.91, Test ACC 0.81 *******
+2023-10-10 15:20:41,608 ******* Epoch 9, Train CE Loss 0.41, Test CE Loss 0.46, Train ACC 0.92, Test ACC 0.83 *******
+2023-10-10 15:21:06,302 ******* Epoch 10, Train CE Loss 0.41, Test CE Loss 0.46, Train ACC 0.91, Test ACC 0.85 *******
+2023-10-10 15:21:31,761 ******* Epoch 11, Train CE Loss 0.39, Test CE Loss 0.46, Train ACC 0.92, Test ACC 0.85 *******
+2023-10-10 15:21:56,910 ******* Epoch 12, Train CE Loss 0.41, Test CE Loss 0.54, Train ACC 0.90, Test ACC 0.76 *******
+2023-10-10 15:22:22,907 ******* Epoch 13, Train CE Loss 0.40, Test CE Loss 0.47, Train ACC 0.92, Test ACC 0.83 *******
+2023-10-10 15:22:48,453 ******* Epoch 14, Train CE Loss 0.36, Test CE Loss 0.42, Train ACC 0.95, Test ACC 0.89 *******
+2023-10-10 15:23:13,810 ******* Epoch 15, Train CE Loss 0.38, Test CE Loss 0.46, Train ACC 0.94, Test ACC 0.83 *******
+2023-10-10 15:23:41,635 ******* Epoch 16, Train CE Loss 0.37, Test CE Loss 0.43, Train ACC 0.94, Test ACC 0.89 *******
+2023-10-10 15:24:07,724 ******* Epoch 17, Train CE Loss 0.38, Test CE Loss 0.53, Train ACC 0.93, Test ACC 0.74 *******
+2023-10-10 15:24:33,828 ******* Epoch 18, Train CE Loss 0.38, Test CE Loss 0.44, Train ACC 0.92, Test ACC 0.85 *******
+2023-10-10 15:24:59,415 ******* Epoch 19, Train CE Loss 0.37, Test CE Loss 0.52, Train ACC 0.95, Test ACC 0.78 *******
+2023-10-10 15:25:24,448 ******* Epoch 20, Train CE Loss 0.37, Test CE Loss 0.50, Train ACC 0.95, Test ACC 0.80 *******
+2023-10-10 15:25:49,387 ******* Epoch 21, Train CE Loss 0.38, Test CE Loss 0.45, Train ACC 0.94, Test ACC 0.85 *******
+2023-10-10 15:26:15,163 ******* Epoch 22, Train CE Loss 0.41, Test CE Loss 0.66, Train ACC 0.90, Test ACC 0.67 *******
+2023-10-10 15:26:40,064 ******* Epoch 23, Train CE Loss 0.35, Test CE Loss 0.49, Train ACC 0.96, Test ACC 0.81 *******
+2023-10-10 15:27:04,636 ******* Epoch 24, Train CE Loss 0.37, Test CE Loss 0.45, Train ACC 0.94, Test ACC 0.87 *******
+2023-10-10 15:27:29,155 ******* Epoch 25, Train CE Loss 0.36, Test CE Loss 0.46, Train ACC 0.95, Test ACC 0.83 *******
+2023-10-10 15:27:55,248 ******* Epoch 26, Train CE Loss 0.40, Test CE Loss 0.44, Train ACC 0.92, Test ACC 0.87 *******
+2023-10-10 15:28:19,809 ******* Epoch 27, Train CE Loss 0.40, Test CE Loss 0.47, Train ACC 0.90, Test ACC 0.81 *******
+2023-10-10 15:28:46,036 ******* Epoch 28, Train CE Loss 0.40, Test CE Loss 0.47, Train ACC 0.91, Test ACC 0.85 *******
+2023-10-10 15:29:11,119 ******* Epoch 29, Train CE Loss 0.40, Test CE Loss 0.42, Train ACC 0.90, Test ACC 0.89 *******
+2023-10-10 15:29:36,952 ******* Epoch 30, Train CE Loss 0.35, Test CE Loss 0.43, Train ACC 0.97, Test ACC 0.87 *******
+2023-10-10 15:30:01,453 ******* Epoch 31, Train CE Loss 0.37, Test CE Loss 0.43, Train ACC 0.94, Test ACC 0.87 *******
+2023-10-10 15:30:28,779 ******* Epoch 32, Train CE Loss 0.37, Test CE Loss 0.42, Train ACC 0.94, Test ACC 0.89 *******
+2023-10-10 15:30:53,120 ******* Epoch 33, Train CE Loss 0.37, Test CE Loss 0.42, Train ACC 0.94, Test ACC 0.89 *******
+2023-10-10 15:31:17,508 ******* Epoch 34, Train CE Loss 0.37, Test CE Loss 0.41, Train ACC 0.94, Test ACC 0.91 *******
+2023-10-10 15:31:42,011 ******* Epoch 35, Train CE Loss 0.34, Test CE Loss 0.42, Train ACC 0.98, Test ACC 0.89 *******
+2023-10-10 15:32:06,920 ******* Epoch 36, Train CE Loss 0.35, Test CE Loss 0.42, Train ACC 0.97, Test ACC 0.91 *******
+2023-10-10 15:32:31,597 ******* Epoch 37, Train CE Loss 0.40, Test CE Loss 0.46, Train ACC 0.91, Test ACC 0.83 *******
+2023-10-10 15:32:56,168 ******* Epoch 38, Train CE Loss 0.41, Test CE Loss 0.52, Train ACC 0.90, Test ACC 0.76 *******
+2023-10-10 15:33:21,932 ******* Epoch 39, Train CE Loss 0.38, Test CE Loss 0.43, Train ACC 0.93, Test ACC 0.89 *******
+2023-10-10 15:33:47,855 ******* Epoch 40, Train CE Loss 0.39, Test CE Loss 0.43, Train ACC 0.92, Test ACC 0.89 *******
+2023-10-10 15:34:12,302 ******* Epoch 41, Train CE Loss 0.36, Test CE Loss 0.47, Train ACC 0.96, Test ACC 0.83 *******
+2023-10-10 15:34:37,993 ******* Epoch 42, Train CE Loss 0.34, Test CE Loss 0.45, Train ACC 0.97, Test ACC 0.85 *******
+2023-10-10 15:35:03,311 ******* Epoch 43, Train CE Loss 0.35, Test CE Loss 0.45, Train ACC 0.96, Test ACC 0.85 *******
+2023-10-10 15:35:29,358 ******* Epoch 44, Train CE Loss 0.34, Test CE Loss 0.62, Train ACC 0.97, Test ACC 0.65 *******
+2023-10-10 15:35:54,559 ******* Epoch 45, Train CE Loss 0.33, Test CE Loss 0.42, Train ACC 0.99, Test ACC 0.89 *******
+2023-10-10 15:36:20,366 ******* Epoch 46, Train CE Loss 0.37, Test CE Loss 0.42, Train ACC 0.94, Test ACC 0.87 *******
+2023-10-10 15:36:45,890 ******* Epoch 47, Train CE Loss 0.35, Test CE Loss 0.43, Train ACC 0.97, Test ACC 0.87 *******
+2023-10-10 15:37:11,855 ******* Epoch 48, Train CE Loss 0.34, Test CE Loss 0.44, Train ACC 0.97, Test ACC 0.85 *******
+2023-10-10 15:37:37,302 ******* Epoch 49, Train CE Loss 0.33, Test CE Loss 0.41, Train ACC 0.98, Test ACC 0.91 *******
+2023-10-10 15:38:03,891 ******* Epoch 50, Train CE Loss 0.34, Test CE Loss 0.41, Train ACC 0.98, Test ACC 0.91 *******
+2023-10-10 15:38:28,021 ******* Epoch 51, Train CE Loss 0.34, Test CE Loss 0.44, Train ACC 0.98, Test ACC 0.87 *******
+2023-10-10 15:38:52,947 ******* Epoch 52, Train CE Loss 0.34, Test CE Loss 0.41, Train ACC 0.97, Test ACC 0.89 *******
+2023-10-10 15:39:18,173 ******* Epoch 53, Train CE Loss 0.35, Test CE Loss 0.42, Train ACC 0.96, Test ACC 0.87 *******
+2023-10-10 15:39:43,114 ******* Epoch 54, Train CE Loss 0.33, Test CE Loss 0.43, Train ACC 0.99, Test ACC 0.91 *******
+2023-10-10 15:40:08,392 ******* Epoch 55, Train CE Loss 0.35, Test CE Loss 0.41, Train ACC 0.97, Test ACC 0.91 *******
+2023-10-10 15:40:33,172 ******* Epoch 56, Train CE Loss 0.35, Test CE Loss 0.41, Train ACC 0.96, Test ACC 0.91 *******
+2023-10-10 15:40:59,244 ******* Epoch 57, Train CE Loss 0.36, Test CE Loss 0.41, Train ACC 0.96, Test ACC 0.91 *******
+2023-10-10 15:41:24,634 ******* Epoch 58, Train CE Loss 0.34, Test CE Loss 0.41, Train ACC 0.97, Test ACC 0.91 *******
+2023-10-10 15:41:48,922 ******* Epoch 59, Train CE Loss 0.35, Test CE Loss 0.42, Train ACC 0.97, Test ACC 0.87 *******
+2023-10-10 15:42:13,345 ******* Epoch 60, Train CE Loss 0.34, Test CE Loss 0.48, Train ACC 0.98, Test ACC 0.80 *******
+2023-10-10 15:42:38,106 ******* Epoch 61, Train CE Loss 0.33, Test CE Loss 0.43, Train ACC 0.99, Test ACC 0.89 *******
+2023-10-10 15:43:03,361 ******* Epoch 62, Train CE Loss 0.33, Test CE Loss 0.43, Train ACC 0.99, Test ACC 0.89 *******
+2023-10-10 15:43:27,832 ******* Epoch 63, Train CE Loss 0.34, Test CE Loss 0.44, Train ACC 0.97, Test ACC 0.85 *******
+2023-10-10 15:43:54,549 ******* Epoch 64, Train CE Loss 0.34, Test CE Loss 0.41, Train ACC 0.97, Test ACC 0.91 *******
+2023-10-10 15:44:19,130 ******* Epoch 65, Train CE Loss 0.35, Test CE Loss 0.44, Train ACC 0.96, Test ACC 0.87 *******
+2023-10-10 15:44:45,749 ******* Epoch 66, Train CE Loss 0.33, Test CE Loss 0.49, Train ACC 0.98, Test ACC 0.83 *******
+2023-10-10 15:45:10,767 ******* Epoch 67, Train CE Loss 0.35, Test CE Loss 0.42, Train ACC 0.95, Test ACC 0.91 *******
+2023-10-10 15:45:37,630 ******* Epoch 68, Train CE Loss 0.33, Test CE Loss 0.43, Train ACC 0.98, Test ACC 0.87 *******
+2023-10-10 15:46:04,423 ******* Epoch 69, Train CE Loss 0.34, Test CE Loss 0.45, Train ACC 0.97, Test ACC 0.85 *******
+2023-10-10 15:46:30,275 ******* Epoch 70, Train CE Loss 0.34, Test CE Loss 0.41, Train ACC 0.97, Test ACC 0.91 *******
+2023-10-10 15:46:54,834 ******* Epoch 71, Train CE Loss 0.34, Test CE Loss 0.43, Train ACC 0.98, Test ACC 0.87 *******
+2023-10-10 15:47:19,871 ******* Epoch 72, Train CE Loss 0.32, Test CE Loss 0.45, Train ACC 1.00, Test ACC 0.85 *******
+2023-10-10 15:47:44,418 ******* Epoch 73, Train CE Loss 0.36, Test CE Loss 0.46, Train ACC 0.96, Test ACC 0.83 *******
+2023-10-10 15:48:09,259 ******* Epoch 74, Train CE Loss 0.36, Test CE Loss 0.46, Train ACC 0.95, Test ACC 0.83 *******
+2023-10-10 15:48:34,108 ******* Epoch 75, Train CE Loss 0.33, Test CE Loss 0.43, Train ACC 0.99, Test ACC 0.89 *******
+2023-10-10 15:48:59,288 ******* Epoch 76, Train CE Loss 0.33, Test CE Loss 0.43, Train ACC 0.98, Test ACC 0.87 *******
+2023-10-10 15:49:25,115 ******* Epoch 77, Train CE Loss 0.33, Test CE Loss 0.41, Train ACC 0.99, Test ACC 0.91 *******
+2023-10-10 15:49:50,430 ******* Epoch 78, Train CE Loss 0.33, Test CE Loss 0.42, Train ACC 0.99, Test ACC 0.91 *******
+2023-10-10 15:50:17,481 ******* Epoch 79, Train CE Loss 0.35, Test CE Loss 0.41, Train ACC 0.96, Test ACC 0.91 *******
+2023-10-10 15:50:41,982 ******* Epoch 80, Train CE Loss 0.34, Test CE Loss 0.41, Train ACC 0.98, Test ACC 0.91 *******
+2023-10-10 15:51:06,140 ******* Epoch 81, Train CE Loss 0.34, Test CE Loss 0.41, Train ACC 0.97, Test ACC 0.91 *******
+2023-10-10 15:51:33,233 ******* Epoch 82, Train CE Loss 0.34, Test CE Loss 0.41, Train ACC 0.97, Test ACC 0.91 *******
+2023-10-10 15:51:58,286 ******* Epoch 83, Train CE Loss 0.33, Test CE Loss 0.42, Train ACC 0.99, Test ACC 0.91 *******
+2023-10-10 15:52:23,556 ******* Epoch 84, Train CE Loss 0.37, Test CE Loss 0.41, Train ACC 0.94, Test ACC 0.91 *******
+2023-10-10 15:52:49,458 ******* Epoch 85, Train CE Loss 0.34, Test CE Loss 0.41, Train ACC 0.98, Test ACC 0.91 *******
+2023-10-10 15:53:13,728 ******* Epoch 86, Train CE Loss 0.34, Test CE Loss 0.42, Train ACC 0.97, Test ACC 0.89 *******
+2023-10-10 15:53:38,313 ******* Epoch 87, Train CE Loss 0.33, Test CE Loss 0.44, Train ACC 0.99, Test ACC 0.87 *******
+2023-10-10 15:54:03,764 ******* Epoch 88, Train CE Loss 0.33, Test CE Loss 0.43, Train ACC 0.98, Test ACC 0.87 *******
+2023-10-10 15:54:32,495 ******* Epoch 89, Train CE Loss 0.33, Test CE Loss 0.41, Train ACC 0.98, Test ACC 0.91 *******
+2023-10-10 15:55:00,287 ******* Epoch 90, Train CE Loss 0.33, Test CE Loss 0.41, Train ACC 0.99, Test ACC 0.91 *******
+2023-10-10 15:55:24,229 ******* Epoch 91, Train CE Loss 0.33, Test CE Loss 0.42, Train ACC 0.98, Test ACC 0.89 *******
+2023-10-10 15:55:50,876 ******* Epoch 92, Train CE Loss 0.34, Test CE Loss 0.41, Train ACC 0.98, Test ACC 0.91 *******
+2023-10-10 15:56:16,540 ******* Epoch 93, Train CE Loss 0.33, Test CE Loss 0.41, Train ACC 0.99, Test ACC 0.91 *******
+2023-10-10 15:56:41,296 ******* Epoch 94, Train CE Loss 0.34, Test CE Loss 0.42, Train ACC 0.97, Test ACC 0.91 *******
+2023-10-10 15:57:06,622 ******* Epoch 95, Train CE Loss 0.36, Test CE Loss 0.43, Train ACC 0.95, Test ACC 0.87 *******
+2023-10-10 15:57:30,784 ******* Epoch 96, Train CE Loss 0.35, Test CE Loss 0.42, Train ACC 0.97, Test ACC 0.89 *******
+2023-10-10 15:57:56,044 ******* Epoch 97, Train CE Loss 0.34, Test CE Loss 0.42, Train ACC 0.98, Test ACC 0.87 *******
+2023-10-10 15:58:21,846 ******* Epoch 98, Train CE Loss 0.32, Test CE Loss 0.42, Train ACC 0.99, Test ACC 0.89 *******
+2023-10-10 15:58:47,358 ******* Epoch 99, Train CE Loss 0.32, Test CE Loss 0.41, Train ACC 0.99, Test ACC 0.91 *******
+2023-10-10 15:59:12,010 ******* Epoch 100, Train CE Loss 0.33, Test CE Loss 0.42, Train ACC 0.99, Test ACC 0.87 *******
+2023-10-10 15:59:15,211 ******* Classification Report last_in_test:*******
+2023-10-10 15:59:15,212               precision    recall  f1-score   support
+
+          CN       0.83      0.93      0.88        27
+          AD       0.92      0.81      0.86        27
+
+    accuracy                           0.87        54
+   macro avg       0.88      0.87      0.87        54
+weighted avg       0.88      0.87      0.87        54
+
+2023-10-10 15:59:15,214 ******* Classification Spe 0.87:*******
+2023-10-10 15:59:15,214 *******Again Last Epoch 100,  Val ACC 0.87*******
+2023-10-10 15:59:18,362 ******* Classification Report best_in_test:*******
+2023-10-10 15:59:18,362               precision    recall  f1-score   support
+
+          CN       0.84      1.00      0.92        27
+          AD       1.00      0.81      0.90        27
+
+    accuracy                           0.91        54
+   macro avg       0.92      0.91      0.91        54
+weighted avg       0.92      0.91      0.91        54
+
+2023-10-10 15:59:18,364 ******* Classification Spe 0.91:*******
+2023-10-10 15:59:18,364 ******* Best Epoch 99, Train ACC 0.99, Val MAE 0.91, In Test MAE 0.91 *******

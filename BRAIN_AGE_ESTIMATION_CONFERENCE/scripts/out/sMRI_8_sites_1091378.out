@@ -1,0 +1,102 @@
+Thu Oct  5 23:09:18 CST 2023
+Thu Oct  5 23:09:19 2023       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.57.02    Driver Version: 470.57.02    CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA A100 80G...  On   | 00000000:4B:00.0 Off |                    0 |
+| N/A   30C    P0    42W / 300W |      0MiB / 80994MiB |      0%      Default |
+|                               |                      |             Disabled |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+----------------- Options ---------------
+                   GPU_no: 0                             
+                  GPU_num: 1                             
+               batch_size: 8                             
+                loss_func: MSE                           
+                     lr_s: 0.001                         
+              model_depth: 34                            
+                 n_epochs: 200                           
+                   n_exps: 1                             
+                     note:                               
+                  parsave: /public/bme/home/meilang/codes/ECR/BRAIN_AGE_ESTIMATION_CONFERENCE/OUTPUT/threedim_3view_GAF-20230811-153250_p	[default: None]
+              pretrain_3D: False                         
+                     wd_s: 0.0001                        
+----------------- End -------------------
+******** Test on exp 1 ********
+******** Test Finished on Exp 1! ********
+----------------- Options ---------------
+                   GPU_no: 0                             
+                  GPU_num: 1                             
+               batch_size: 8                             
+                loss_func: MSE                           
+                     lr_s: 0.001                         
+              model_depth: 34                            
+                 n_epochs: 200                           
+                   n_exps: 1                             
+                     note:                               
+                  parsave: /public/bme/home/meilang/codes/ECR/BRAIN_AGE_ESTIMATION_CONFERENCE/OUTPUT/threedim_3view_GAF-20230811-153250_p	[default: None]
+              pretrain_3D: False                         
+                     wd_s: 0.0001                        
+----------------- End -------------------
+******** Test on exp 1 ********
+******** Test Finished on Exp 1! ********
+----------------- Options ---------------
+                   GPU_no: 0                             
+                  GPU_num: 1                             
+               batch_size: 8                             
+                loss_func: MSE                           
+                     lr_s: 0.001                         
+              model_depth: 34                            
+                 n_epochs: 200                           
+                   n_exps: 1                             
+                     note:                               
+                  parsave: /public/bme/home/meilang/codes/ECR/BRAIN_AGE_ESTIMATION_CONFERENCE/OUTPUT/threedim_3view_GAF-20230811-153250_p	[default: None]
+              pretrain_3D: False                         
+                     wd_s: 0.0001                        
+----------------- End -------------------
+******** Test on exp 1 ********
+******** Test Finished on Exp 1! ********
+----------------- Options ---------------
+                   GPU_no: 0                             
+                  GPU_num: 1                             
+               batch_size: 8                             
+                loss_func: MSE                           
+                     lr_s: 0.001                         
+              model_depth: 34                            
+                 n_epochs: 200                           
+                   n_exps: 1                             
+                     note:                               
+                  parsave: /public/bme/home/meilang/codes/ECR/BRAIN_AGE_ESTIMATION_CONFERENCE/OUTPUT/threedim_3view_GAF-20230811-153250_p	[default: None]
+              pretrain_3D: False                         
+                     wd_s: 0.0001                        
+----------------- End -------------------
+******** Test on exp 1 ********
+******** Test Finished on Exp 1! ********
+----------------- Options ---------------
+                   GPU_no: 0                             
+                  GPU_num: 1                             
+               batch_size: 8                             
+                loss_func: MSE                           
+                     lr_s: 0.001                         
+              model_depth: 34                            
+                 n_epochs: 200                           
+                   n_exps: 1                             
+                     note:                               
+                  parsave: /public/bme/home/meilang/codes/ECR/BRAIN_AGE_ESTIMATION_CONFERENCE/OUTPUT/threedim_3view_GAF-20230811-153250_p	[default: None]
+              pretrain_3D: False                         
+                     wd_s: 0.0001                        
+----------------- End -------------------
+******** Test on exp 1 ********
+******** Test Finished on Exp 1! ********
+Thu Oct  5 23:12:13 CST 2023

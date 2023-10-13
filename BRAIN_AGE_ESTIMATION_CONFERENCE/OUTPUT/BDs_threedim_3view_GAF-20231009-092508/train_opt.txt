@@ -1,0 +1,16 @@
+----------------- Options ---------------
+                   GPU_no: 0                             
+                  GPU_num: 1                             
+               batch_size: 8                             
+                diag_mode: CN_MCI_AD                     
+                loss_func: MSE                           
+                     lr_s: 0.001                         
+              model_depth: 34                            
+                 n_epochs: 100                           	[default: 200]
+                   n_exps: 1                             
+                     note:                               
+                  parsave: /public/bme/home/meilang/codes/ECR/BRAIN_AGE_ESTIMATION_CONFERENCE/OUTPUT/BDs_threedim_3view_GAF-20231009-092508	[default: None]
+              pretrain_3D: False                         
+       pretrain_age_model: True                          
+                     wd_s: 0.0001                        
+----------------- End -------------------

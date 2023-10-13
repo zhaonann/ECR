@@ -1,0 +1,445 @@
+Mon Oct  9 20:11:04 CST 2023
+Mon Oct  9 20:11:04 2023       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 515.65.07    Driver Version: 515.65.07    CUDA Version: 11.7     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA A100 80G...  On   | 00000000:9C:00.0 Off |                    0 |
+| N/A   34C    P0    44W / 300W |      0MiB / 81920MiB |      0%      Default |
+|                               |                      |             Disabled |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+----------------- Options ---------------
+                   GPU_no: 0                             
+                  GPU_num: 1                             
+               batch_size: 8                             
+                diag_mode: CN_EMCI                       	[default: CN_MCI_AD]
+                loss_func: MSE                           
+                     lr_s: 0.001                         
+              model_depth: 34                            
+                 n_epochs: 100                           	[default: 200]
+                   n_exps: 1                             
+                     note:                               
+                  parsave: /public/bme/home/meilang/codes/ECR/BRAIN_AGE_ESTIMATION_CONFERENCE/OUTPUT/BDs_threedim_3view_GAF-20231009-201110	[default: None]
+              pretrain_3D: False                         
+       pretrain_age_model: True                          
+                     wd_s: 0.0001                        
+----------------- End -------------------
+******** Training on exp 1 ********
+10/09 08:11:11 PM sMRI, param size = 2.883 MB
+---------- Networks initialized -------------
+Diag_MLP(
+  (encoder3d): Encoder3d(
+    (pool1): MaxPool3d(kernel_size=(2, 2, 2), stride=(2, 2, 2), padding=0, dilation=1, ceil_mode=False)
+    (pool2): MaxPool3d(kernel_size=(2, 2, 2), stride=(2, 2, 2), padding=0, dilation=1, ceil_mode=False)
+    (pool3): MaxPool3d(kernel_size=(2, 2, 2), stride=(2, 2, 2), padding=0, dilation=1, ceil_mode=False)
+    (in_tr): InputTransition3d(
+      (conv1): Conv3d(1, 16, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+      (bn1): InstanceNorm3d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (activate1): ReLU(inplace=True)
+    )
+    (down_conv_bk2): Conv3D_Block(
+      (conv1): Sequential(
+        (0): Conv3d(16, 32, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+        (1): InstanceNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (2): ReLU()
+      )
+      (residual_upsampler): Conv3d(16, 32, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+    )
+    (down_conv_bk3): Conv3D_Block(
+      (conv1): Sequential(
+        (0): Conv3d(32, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+        (1): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (2): ReLU()
+      )
+      (residual_upsampler): Conv3d(32, 64, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+    )
+    (down_conv_bk4): Conv3D_Block(
+      (conv1): Sequential(
+        (0): Conv3d(64, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+        (1): InstanceNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (2): ReLU()
+      )
+      (residual_upsampler): Conv3d(64, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+    )
+    (block_1_pool): MaxPool3d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (block_2_1): Sequential(
+      (0): Conv3d(128, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+      (1): InstanceNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (2): ReLU()
+      (3): Conv3d(128, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+      (4): InstanceNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (5): ReLU()
+      (6): Conv3d(128, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+      (7): InstanceNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (8): ReLU()
+    )
+    (block_2_pool): MaxPool3d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (block_3_1): Sequential(
+      (0): AdaptiveAvgPool3d(output_size=1)
+      (1): Flatten(start_dim=1, end_dim=-1)
+      (2): Linear(in_features=128, out_features=128, bias=True)
+    )
+  )
+  (encoder_B): Encoder2d(
+    (pool1): MaxPool2d(kernel_size=(2, 2), stride=2, padding=0, dilation=1, ceil_mode=False)
+    (pool2): MaxPool2d(kernel_size=(2, 2), stride=2, padding=0, dilation=1, ceil_mode=False)
+    (pool3): MaxPool2d(kernel_size=(2, 2), stride=2, padding=0, dilation=1, ceil_mode=False)
+    (in_tr): InputTransition2d(
+      (conv1): Conv2d(1, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (bn1): InstanceNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (activate1): ReLU()
+    )
+    (down_conv_bk2): Conv2D_Block(
+      (conv1_blk): Sequential(
+        (0): Conv2d(16, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): InstanceNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (2): ReLU()
+      )
+      (downsample): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    )
+    (down_conv_bk3): Conv2D_Block(
+      (conv1_blk): Sequential(
+        (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): InstanceNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (2): ReLU()
+      )
+      (downsample): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    )
+    (down_conv_bk4): Conv2D_Block(
+      (conv1_blk): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (2): ReLU()
+      )
+      (downsample): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    )
+    (block_1_pool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (block_2_1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (2): ReLU()
+      (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (4): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (5): ReLU()
+      (6): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (7): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (8): ReLU()
+    )
+    (block_2_pool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (block_3_1): Sequential(
+      (0): AdaptiveAvgPool2d(output_size=1)
+      (1): Flatten(start_dim=1, end_dim=-1)
+      (2): Linear(in_features=128, out_features=128, bias=True)
+    )
+  )
+  (GAF_block): Sequential(
+    (0): Linear(in_features=219, out_features=256, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=256, out_features=128, bias=True)
+  )
+  (kv_block): Sequential(
+    (0): ReLU()
+    (1): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (q1_block): Sequential(
+    (0): ReLU()
+    (1): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (q2_block): Sequential(
+    (0): ReLU()
+    (1): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (q3_block): Sequential(
+    (0): ReLU()
+    (1): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (q4_block): Sequential(
+    (0): ReLU()
+    (1): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (multihead_attn1): MultiheadAttention(
+    (out_proj): NonDynamicallyQuantizableLinear(in_features=128, out_features=128, bias=True)
+  )
+  (multihead_attn2): MultiheadAttention(
+    (out_proj): NonDynamicallyQuantizableLinear(in_features=128, out_features=128, bias=True)
+  )
+  (multihead_attn3): MultiheadAttention(
+    (out_proj): NonDynamicallyQuantizableLinear(in_features=128, out_features=128, bias=True)
+  )
+  (multihead_attn4): MultiheadAttention(
+    (out_proj): NonDynamicallyQuantizableLinear(in_features=128, out_features=128, bias=True)
+  )
+  (fusion_blk): Sequential(
+    (0): Linear(in_features=640, out_features=256, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=256, out_features=128, bias=True)
+  )
+  (age_blk): Sequential(
+    (0): ReLU()
+    (1): Linear(in_features=128, out_features=1, bias=True)
+  )
+  (diag_blk): Sequential(
+    (0): ReLU()
+    (1): Linear(in_features=132, out_features=128, bias=True)
+    (2): ReLU()
+    (3): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (4): Dropout(p=0.5, inplace=False)
+    (5): Linear(in_features=128, out_features=128, bias=True)
+    (6): ReLU()
+    (7): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (8): Dropout(p=0.5, inplace=False)
+    (9): Linear(in_features=128, out_features=2, bias=True)
+  )
+)
+[Network sMRI] Total number of parameters : 2.883 M
+[Network sMRI] Total number of trainable parameters : 2.883 M
+-----------------------------------------------
+Load pretrain age model!
+10/09 08:11:41 PM ******* Epoch 1, Train CE Loss 0.68, Val CE Loss 0.66, Train ACC 0.55, Val ACC 0.72 *******
+End of epoch 1 / 100 	 Time Taken: 29 sec
+10/09 08:12:09 PM ******* Epoch 2, Train CE Loss 0.67, Val CE Loss 0.72, Train ACC 0.59, Val ACC 0.42 *******
+End of epoch 2 / 100 	 Time Taken: 28 sec
+10/09 08:12:38 PM ******* Epoch 3, Train CE Loss 0.68, Val CE Loss 0.72, Train ACC 0.57, Val ACC 0.73 *******
+End of epoch 3 / 100 	 Time Taken: 28 sec
+10/09 08:13:07 PM ******* Epoch 4, Train CE Loss 0.67, Val CE Loss 0.79, Train ACC 0.61, Val ACC 0.32 *******
+End of epoch 4 / 100 	 Time Taken: 28 sec
+10/09 08:13:34 PM ******* Epoch 5, Train CE Loss 0.60, Val CE Loss 0.69, Train ACC 0.67, Val ACC 0.39 *******
+End of epoch 5 / 100 	 Time Taken: 27 sec
+10/09 08:14:02 PM ******* Epoch 6, Train CE Loss 0.57, Val CE Loss 0.57, Train ACC 0.69, Val ACC 0.65 *******
+End of epoch 6 / 100 	 Time Taken: 28 sec
+10/09 08:14:30 PM ******* Epoch 7, Train CE Loss 0.54, Val CE Loss 0.42, Train ACC 0.77, Val ACC 0.91 *******
+End of epoch 7 / 100 	 Time Taken: 27 sec
+10/09 08:14:59 PM ******* Epoch 8, Train CE Loss 0.54, Val CE Loss 0.55, Train ACC 0.74, Val ACC 0.65 *******
+End of epoch 8 / 100 	 Time Taken: 29 sec
+10/09 08:15:27 PM ******* Epoch 9, Train CE Loss 0.48, Val CE Loss 0.41, Train ACC 0.82, Val ACC 0.91 *******
+End of epoch 9 / 100 	 Time Taken: 28 sec
+10/09 08:15:56 PM ******* Epoch 10, Train CE Loss 0.49, Val CE Loss 0.45, Train ACC 0.81, Val ACC 0.91 *******
+End of epoch 10 / 100 	 Time Taken: 29 sec
+10/09 08:16:25 PM ******* Epoch 11, Train CE Loss 0.45, Val CE Loss 0.43, Train ACC 0.85, Val ACC 0.88 *******
+End of epoch 11 / 100 	 Time Taken: 28 sec
+10/09 08:16:53 PM ******* Epoch 12, Train CE Loss 0.46, Val CE Loss 0.50, Train ACC 0.85, Val ACC 0.75 *******
+End of epoch 12 / 100 	 Time Taken: 28 sec
+10/09 08:17:22 PM ******* Epoch 13, Train CE Loss 0.43, Val CE Loss 0.40, Train ACC 0.87, Val ACC 0.91 *******
+End of epoch 13 / 100 	 Time Taken: 28 sec
+10/09 08:17:50 PM ******* Epoch 14, Train CE Loss 0.46, Val CE Loss 0.42, Train ACC 0.85, Val ACC 0.86 *******
+End of epoch 14 / 100 	 Time Taken: 28 sec
+10/09 08:18:19 PM ******* Epoch 15, Train CE Loss 0.46, Val CE Loss 0.43, Train ACC 0.85, Val ACC 0.88 *******
+End of epoch 15 / 100 	 Time Taken: 28 sec
+10/09 08:18:48 PM ******* Epoch 16, Train CE Loss 0.46, Val CE Loss 0.59, Train ACC 0.85, Val ACC 0.62 *******
+End of epoch 16 / 100 	 Time Taken: 29 sec
+10/09 08:19:16 PM ******* Epoch 17, Train CE Loss 0.44, Val CE Loss 0.47, Train ACC 0.88, Val ACC 0.88 *******
+End of epoch 17 / 100 	 Time Taken: 27 sec
+10/09 08:19:44 PM ******* Epoch 18, Train CE Loss 0.46, Val CE Loss 0.44, Train ACC 0.85, Val ACC 0.86 *******
+End of epoch 18 / 100 	 Time Taken: 27 sec
+10/09 08:20:13 PM ******* Epoch 19, Train CE Loss 0.47, Val CE Loss 0.44, Train ACC 0.84, Val ACC 0.88 *******
+End of epoch 19 / 100 	 Time Taken: 28 sec
+10/09 08:20:41 PM ******* Epoch 20, Train CE Loss 0.45, Val CE Loss 0.44, Train ACC 0.87, Val ACC 0.88 *******
+End of epoch 20 / 100 	 Time Taken: 28 sec
+10/09 08:21:10 PM ******* Epoch 21, Train CE Loss 0.40, Val CE Loss 0.44, Train ACC 0.91, Val ACC 0.90 *******
+End of epoch 21 / 100 	 Time Taken: 29 sec
+10/09 08:21:39 PM ******* Epoch 22, Train CE Loss 0.41, Val CE Loss 0.76, Train ACC 0.90, Val ACC 0.36 *******
+End of epoch 22 / 100 	 Time Taken: 28 sec
+10/09 08:22:08 PM ******* Epoch 23, Train CE Loss 0.42, Val CE Loss 0.42, Train ACC 0.91, Val ACC 0.89 *******
+End of epoch 23 / 100 	 Time Taken: 29 sec
+10/09 08:22:37 PM ******* Epoch 24, Train CE Loss 0.42, Val CE Loss 0.42, Train ACC 0.88, Val ACC 0.91 *******
+End of epoch 24 / 100 	 Time Taken: 28 sec
+10/09 08:23:06 PM ******* Epoch 25, Train CE Loss 0.41, Val CE Loss 0.41, Train ACC 0.91, Val ACC 0.89 *******
+End of epoch 25 / 100 	 Time Taken: 29 sec
+10/09 08:23:35 PM ******* Epoch 26, Train CE Loss 0.43, Val CE Loss 0.48, Train ACC 0.89, Val ACC 0.77 *******
+End of epoch 26 / 100 	 Time Taken: 28 sec
+10/09 08:24:05 PM ******* Epoch 27, Train CE Loss 0.42, Val CE Loss 0.54, Train ACC 0.89, Val ACC 0.81 *******
+End of epoch 27 / 100 	 Time Taken: 29 sec
+10/09 08:24:33 PM ******* Epoch 28, Train CE Loss 0.49, Val CE Loss 0.51, Train ACC 0.82, Val ACC 0.88 *******
+End of epoch 28 / 100 	 Time Taken: 27 sec
+10/09 08:25:01 PM ******* Epoch 29, Train CE Loss 0.45, Val CE Loss 0.45, Train ACC 0.87, Val ACC 0.85 *******
+End of epoch 29 / 100 	 Time Taken: 28 sec
+10/09 08:25:28 PM ******* Epoch 30, Train CE Loss 0.41, Val CE Loss 0.46, Train ACC 0.90, Val ACC 0.86 *******
+End of epoch 30 / 100 	 Time Taken: 27 sec
+10/09 08:25:56 PM ******* Epoch 31, Train CE Loss 0.43, Val CE Loss 0.47, Train ACC 0.89, Val ACC 0.80 *******
+End of epoch 31 / 100 	 Time Taken: 27 sec
+10/09 08:26:25 PM ******* Epoch 32, Train CE Loss 0.38, Val CE Loss 0.48, Train ACC 0.93, Val ACC 0.88 *******
+End of epoch 32 / 100 	 Time Taken: 29 sec
+10/09 08:26:54 PM ******* Epoch 33, Train CE Loss 0.39, Val CE Loss 0.43, Train ACC 0.91, Val ACC 0.89 *******
+End of epoch 33 / 100 	 Time Taken: 28 sec
+10/09 08:27:24 PM ******* Epoch 34, Train CE Loss 0.37, Val CE Loss 0.42, Train ACC 0.94, Val ACC 0.88 *******
+End of epoch 34 / 100 	 Time Taken: 29 sec
+10/09 08:27:52 PM ******* Epoch 35, Train CE Loss 0.41, Val CE Loss 0.53, Train ACC 0.90, Val ACC 0.75 *******
+End of epoch 35 / 100 	 Time Taken: 27 sec
+10/09 08:28:21 PM ******* Epoch 36, Train CE Loss 0.39, Val CE Loss 0.48, Train ACC 0.92, Val ACC 0.85 *******
+End of epoch 36 / 100 	 Time Taken: 29 sec
+10/09 08:28:50 PM ******* Epoch 37, Train CE Loss 0.39, Val CE Loss 0.44, Train ACC 0.92, Val ACC 0.86 *******
+End of epoch 37 / 100 	 Time Taken: 29 sec
+10/09 08:29:21 PM ******* Epoch 38, Train CE Loss 0.45, Val CE Loss 0.48, Train ACC 0.88, Val ACC 0.88 *******
+End of epoch 38 / 100 	 Time Taken: 30 sec
+10/09 08:29:50 PM ******* Epoch 39, Train CE Loss 0.45, Val CE Loss 0.53, Train ACC 0.86, Val ACC 0.77 *******
+End of epoch 39 / 100 	 Time Taken: 28 sec
+10/09 08:30:18 PM ******* Epoch 40, Train CE Loss 0.38, Val CE Loss 0.46, Train ACC 0.93, Val ACC 0.88 *******
+End of epoch 40 / 100 	 Time Taken: 27 sec
+10/09 08:30:46 PM ******* Epoch 41, Train CE Loss 0.38, Val CE Loss 0.51, Train ACC 0.94, Val ACC 0.84 *******
+End of epoch 41 / 100 	 Time Taken: 28 sec
+10/09 08:31:14 PM ******* Epoch 42, Train CE Loss 0.39, Val CE Loss 0.50, Train ACC 0.92, Val ACC 0.85 *******
+End of epoch 42 / 100 	 Time Taken: 28 sec
+10/09 08:31:43 PM ******* Epoch 43, Train CE Loss 0.40, Val CE Loss 0.48, Train ACC 0.90, Val ACC 0.83 *******
+End of epoch 43 / 100 	 Time Taken: 28 sec
+10/09 08:32:12 PM ******* Epoch 44, Train CE Loss 0.41, Val CE Loss 0.45, Train ACC 0.90, Val ACC 0.85 *******
+End of epoch 44 / 100 	 Time Taken: 29 sec
+10/09 08:32:41 PM ******* Epoch 45, Train CE Loss 0.38, Val CE Loss 0.48, Train ACC 0.92, Val ACC 0.86 *******
+End of epoch 45 / 100 	 Time Taken: 28 sec
+10/09 08:33:10 PM ******* Epoch 46, Train CE Loss 0.38, Val CE Loss 0.49, Train ACC 0.93, Val ACC 0.88 *******
+End of epoch 46 / 100 	 Time Taken: 29 sec
+10/09 08:33:39 PM ******* Epoch 47, Train CE Loss 0.39, Val CE Loss 0.45, Train ACC 0.92, Val ACC 0.81 *******
+End of epoch 47 / 100 	 Time Taken: 29 sec
+10/09 08:34:09 PM ******* Epoch 48, Train CE Loss 0.39, Val CE Loss 0.46, Train ACC 0.92, Val ACC 0.86 *******
+End of epoch 48 / 100 	 Time Taken: 29 sec
+10/09 08:34:40 PM ******* Epoch 49, Train CE Loss 0.40, Val CE Loss 0.48, Train ACC 0.91, Val ACC 0.88 *******
+End of epoch 49 / 100 	 Time Taken: 31 sec
+10/09 08:35:10 PM ******* Epoch 50, Train CE Loss 0.43, Val CE Loss 0.42, Train ACC 0.88, Val ACC 0.89 *******
+End of epoch 50 / 100 	 Time Taken: 29 sec
+10/09 08:35:41 PM ******* Epoch 51, Train CE Loss 0.39, Val CE Loss 0.45, Train ACC 0.91, Val ACC 0.88 *******
+End of epoch 51 / 100 	 Time Taken: 31 sec
+10/09 08:36:12 PM ******* Epoch 52, Train CE Loss 0.38, Val CE Loss 0.45, Train ACC 0.93, Val ACC 0.88 *******
+End of epoch 52 / 100 	 Time Taken: 30 sec
+10/09 08:36:43 PM ******* Epoch 53, Train CE Loss 0.37, Val CE Loss 0.43, Train ACC 0.93, Val ACC 0.89 *******
+End of epoch 53 / 100 	 Time Taken: 31 sec
+10/09 08:37:12 PM ******* Epoch 54, Train CE Loss 0.37, Val CE Loss 0.48, Train ACC 0.94, Val ACC 0.88 *******
+End of epoch 54 / 100 	 Time Taken: 29 sec
+10/09 08:37:44 PM ******* Epoch 55, Train CE Loss 0.37, Val CE Loss 0.46, Train ACC 0.93, Val ACC 0.89 *******
+End of epoch 55 / 100 	 Time Taken: 31 sec
+10/09 08:38:16 PM ******* Epoch 56, Train CE Loss 0.36, Val CE Loss 0.40, Train ACC 0.95, Val ACC 0.91 *******
+End of epoch 56 / 100 	 Time Taken: 31 sec
+10/09 08:38:46 PM ******* Epoch 57, Train CE Loss 0.37, Val CE Loss 0.46, Train ACC 0.94, Val ACC 0.86 *******
+End of epoch 57 / 100 	 Time Taken: 30 sec
+10/09 08:39:17 PM ******* Epoch 58, Train CE Loss 0.36, Val CE Loss 0.44, Train ACC 0.95, Val ACC 0.88 *******
+End of epoch 58 / 100 	 Time Taken: 31 sec
+10/09 08:39:49 PM ******* Epoch 59, Train CE Loss 0.39, Val CE Loss 0.44, Train ACC 0.93, Val ACC 0.88 *******
+End of epoch 59 / 100 	 Time Taken: 31 sec
+10/09 08:40:20 PM ******* Epoch 60, Train CE Loss 0.40, Val CE Loss 0.41, Train ACC 0.92, Val ACC 0.91 *******
+End of epoch 60 / 100 	 Time Taken: 31 sec
+10/09 08:40:52 PM ******* Epoch 61, Train CE Loss 0.38, Val CE Loss 0.43, Train ACC 0.92, Val ACC 0.89 *******
+End of epoch 61 / 100 	 Time Taken: 31 sec
+10/09 08:41:23 PM ******* Epoch 62, Train CE Loss 0.39, Val CE Loss 0.42, Train ACC 0.91, Val ACC 0.89 *******
+End of epoch 62 / 100 	 Time Taken: 31 sec
+10/09 08:41:54 PM ******* Epoch 63, Train CE Loss 0.37, Val CE Loss 0.43, Train ACC 0.94, Val ACC 0.89 *******
+End of epoch 63 / 100 	 Time Taken: 31 sec
+10/09 08:42:26 PM ******* Epoch 64, Train CE Loss 0.39, Val CE Loss 0.46, Train ACC 0.92, Val ACC 0.90 *******
+End of epoch 64 / 100 	 Time Taken: 31 sec
+10/09 08:42:58 PM ******* Epoch 65, Train CE Loss 0.37, Val CE Loss 0.45, Train ACC 0.93, Val ACC 0.89 *******
+End of epoch 65 / 100 	 Time Taken: 31 sec
+10/09 08:43:29 PM ******* Epoch 66, Train CE Loss 0.36, Val CE Loss 0.43, Train ACC 0.96, Val ACC 0.90 *******
+End of epoch 66 / 100 	 Time Taken: 31 sec
+10/09 08:44:01 PM ******* Epoch 67, Train CE Loss 0.35, Val CE Loss 0.43, Train ACC 0.96, Val ACC 0.90 *******
+End of epoch 67 / 100 	 Time Taken: 31 sec
+10/09 08:44:32 PM ******* Epoch 68, Train CE Loss 0.37, Val CE Loss 0.44, Train ACC 0.94, Val ACC 0.90 *******
+End of epoch 68 / 100 	 Time Taken: 31 sec
+10/09 08:45:04 PM ******* Epoch 69, Train CE Loss 0.37, Val CE Loss 0.46, Train ACC 0.93, Val ACC 0.86 *******
+End of epoch 69 / 100 	 Time Taken: 32 sec
+10/09 08:45:35 PM ******* Epoch 70, Train CE Loss 0.34, Val CE Loss 0.49, Train ACC 0.97, Val ACC 0.88 *******
+End of epoch 70 / 100 	 Time Taken: 31 sec
+10/09 08:46:06 PM ******* Epoch 71, Train CE Loss 0.37, Val CE Loss 0.42, Train ACC 0.94, Val ACC 0.91 *******
+End of epoch 71 / 100 	 Time Taken: 31 sec
+10/09 08:46:39 PM ******* Epoch 72, Train CE Loss 0.38, Val CE Loss 0.44, Train ACC 0.93, Val ACC 0.88 *******
+End of epoch 72 / 100 	 Time Taken: 32 sec
+10/09 08:47:11 PM ******* Epoch 73, Train CE Loss 0.35, Val CE Loss 0.44, Train ACC 0.95, Val ACC 0.90 *******
+End of epoch 73 / 100 	 Time Taken: 31 sec
+10/09 08:47:42 PM ******* Epoch 74, Train CE Loss 0.37, Val CE Loss 0.42, Train ACC 0.94, Val ACC 0.91 *******
+End of epoch 74 / 100 	 Time Taken: 30 sec
+10/09 08:48:13 PM ******* Epoch 75, Train CE Loss 0.35, Val CE Loss 0.44, Train ACC 0.96, Val ACC 0.90 *******
+End of epoch 75 / 100 	 Time Taken: 31 sec
+10/09 08:48:45 PM ******* Epoch 76, Train CE Loss 0.35, Val CE Loss 0.44, Train ACC 0.96, Val ACC 0.90 *******
+End of epoch 76 / 100 	 Time Taken: 31 sec
+10/09 08:49:16 PM ******* Epoch 77, Train CE Loss 0.39, Val CE Loss 0.46, Train ACC 0.91, Val ACC 0.88 *******
+End of epoch 77 / 100 	 Time Taken: 31 sec
+10/09 08:49:48 PM ******* Epoch 78, Train CE Loss 0.37, Val CE Loss 0.46, Train ACC 0.94, Val ACC 0.89 *******
+End of epoch 78 / 100 	 Time Taken: 31 sec
+10/09 08:50:19 PM ******* Epoch 79, Train CE Loss 0.37, Val CE Loss 0.43, Train ACC 0.94, Val ACC 0.89 *******
+End of epoch 79 / 100 	 Time Taken: 30 sec
+10/09 08:50:51 PM ******* Epoch 80, Train CE Loss 0.36, Val CE Loss 0.41, Train ACC 0.94, Val ACC 0.92 *******
+End of epoch 80 / 100 	 Time Taken: 32 sec
+10/09 08:51:23 PM ******* Epoch 81, Train CE Loss 0.37, Val CE Loss 0.41, Train ACC 0.94, Val ACC 0.91 *******
+End of epoch 81 / 100 	 Time Taken: 31 sec
+10/09 08:51:54 PM ******* Epoch 82, Train CE Loss 0.37, Val CE Loss 0.43, Train ACC 0.94, Val ACC 0.91 *******
+End of epoch 82 / 100 	 Time Taken: 31 sec
+10/09 08:52:25 PM ******* Epoch 83, Train CE Loss 0.37, Val CE Loss 0.44, Train ACC 0.94, Val ACC 0.91 *******
+End of epoch 83 / 100 	 Time Taken: 31 sec
+10/09 08:52:57 PM ******* Epoch 84, Train CE Loss 0.35, Val CE Loss 0.41, Train ACC 0.96, Val ACC 0.90 *******
+End of epoch 84 / 100 	 Time Taken: 31 sec
+10/09 08:53:28 PM ******* Epoch 85, Train CE Loss 0.39, Val CE Loss 0.47, Train ACC 0.92, Val ACC 0.86 *******
+End of epoch 85 / 100 	 Time Taken: 31 sec
+10/09 08:54:00 PM ******* Epoch 86, Train CE Loss 0.37, Val CE Loss 0.44, Train ACC 0.94, Val ACC 0.91 *******
+End of epoch 86 / 100 	 Time Taken: 31 sec
+10/09 08:54:33 PM ******* Epoch 87, Train CE Loss 0.34, Val CE Loss 0.46, Train ACC 0.97, Val ACC 0.88 *******
+End of epoch 87 / 100 	 Time Taken: 32 sec
+10/09 08:55:05 PM ******* Epoch 88, Train CE Loss 0.35, Val CE Loss 0.44, Train ACC 0.96, Val ACC 0.90 *******
+End of epoch 88 / 100 	 Time Taken: 31 sec
+10/09 08:55:36 PM ******* Epoch 89, Train CE Loss 0.34, Val CE Loss 0.41, Train ACC 0.97, Val ACC 0.92 *******
+End of epoch 89 / 100 	 Time Taken: 31 sec
+10/09 08:56:07 PM ******* Epoch 90, Train CE Loss 0.35, Val CE Loss 0.47, Train ACC 0.96, Val ACC 0.86 *******
+End of epoch 90 / 100 	 Time Taken: 30 sec
+10/09 08:56:37 PM ******* Epoch 91, Train CE Loss 0.36, Val CE Loss 0.42, Train ACC 0.94, Val ACC 0.91 *******
+End of epoch 91 / 100 	 Time Taken: 30 sec
+10/09 08:57:08 PM ******* Epoch 92, Train CE Loss 0.35, Val CE Loss 0.46, Train ACC 0.96, Val ACC 0.88 *******
+End of epoch 92 / 100 	 Time Taken: 31 sec
+10/09 08:57:40 PM ******* Epoch 93, Train CE Loss 0.36, Val CE Loss 0.42, Train ACC 0.95, Val ACC 0.91 *******
+End of epoch 93 / 100 	 Time Taken: 31 sec
+10/09 08:58:11 PM ******* Epoch 94, Train CE Loss 0.36, Val CE Loss 0.45, Train ACC 0.95, Val ACC 0.90 *******
+End of epoch 94 / 100 	 Time Taken: 31 sec
+10/09 08:58:42 PM ******* Epoch 95, Train CE Loss 0.35, Val CE Loss 0.42, Train ACC 0.96, Val ACC 0.91 *******
+End of epoch 95 / 100 	 Time Taken: 31 sec
+10/09 08:59:13 PM ******* Epoch 96, Train CE Loss 0.36, Val CE Loss 0.44, Train ACC 0.95, Val ACC 0.90 *******
+End of epoch 96 / 100 	 Time Taken: 31 sec
+10/09 08:59:45 PM ******* Epoch 97, Train CE Loss 0.36, Val CE Loss 0.45, Train ACC 0.95, Val ACC 0.89 *******
+End of epoch 97 / 100 	 Time Taken: 31 sec
+10/09 09:00:16 PM ******* Epoch 98, Train CE Loss 0.39, Val CE Loss 0.48, Train ACC 0.92, Val ACC 0.86 *******
+End of epoch 98 / 100 	 Time Taken: 31 sec
+10/09 09:00:47 PM ******* Epoch 99, Train CE Loss 0.34, Val CE Loss 0.43, Train ACC 0.97, Val ACC 0.91 *******
+End of epoch 99 / 100 	 Time Taken: 30 sec
+10/09 09:01:17 PM ******* Epoch 100, Train CE Loss 0.35, Val CE Loss 0.43, Train ACC 0.96, Val ACC 0.91 *******
+End of epoch 100 / 100 	 Time Taken: 29 sec
+10/09 09:01:21 PM ******* Classification Report last_val:*******
+10/09 09:01:21 PM               precision    recall  f1-score   support
+
+          CN       0.82      0.85      0.84        27
+        EMCI       0.94      0.93      0.93        69
+
+    accuracy                           0.91        96
+   macro avg       0.88      0.89      0.89        96
+weighted avg       0.91      0.91      0.91        96
+
+10/09 09:01:21 PM ******* Classification Spe 0.87:*******
+10/09 09:01:25 PM ******* Classification Report last_in_test:*******
+10/09 09:01:25 PM               precision    recall  f1-score   support
+
+          CN       0.72      0.75      0.74        28
+        EMCI       0.90      0.88      0.89        69
+
+    accuracy                           0.85        97
+   macro avg       0.81      0.82      0.81        97
+weighted avg       0.85      0.85      0.85        97
+
+10/09 09:01:25 PM ******* Classification Spe 0.79:*******
+10/09 09:01:25 PM *******Again Last Epoch 100,  Val ACC 0.91, In Test ACC 0.85 *******
+10/09 09:01:29 PM ******* Classification Report best_in_test:*******
+10/09 09:01:29 PM               precision    recall  f1-score   support
+
+          CN       0.68      0.75      0.71        28
+        EMCI       0.89      0.86      0.87        69
+
+    accuracy                           0.82        97
+   macro avg       0.79      0.80      0.79        97
+weighted avg       0.83      0.82      0.83        97
+
+10/09 09:01:29 PM ******* Classification Spe 0.78:*******
+10/09 09:01:29 PM ******* Best Epoch 89, Train ACC 0.97, Val MAE 0.92, In Test MAE 0.82 *******
+**** Exp 0 Finished Training! ****
+Mon Oct  9 21:01:32 CST 2023

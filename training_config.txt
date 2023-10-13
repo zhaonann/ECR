@@ -1,0 +1,11 @@
+ out    OUTPUT          epoch lr  wd       load_pretrain Finetune_ALL Stratify  Category   Train_Val_Test  ACC
+1127715 20231008-224231 100 0.001 0.0001   Yes           Yes          Yes       CN_MCI_AD_EXP  Yes             0.80
+1127863 20231009-092508 100 0.001 0.0001   Yes           Yes          Yes       CN_MCI_AD      No              0.90
+1127912 20231009-121222 100 0.001 0.0001   Yes           Yes          Yes       CN_EMCI        No              0.85
+1129592 20231009-201110 100 0.001 0.0001   Yes           Yes          Yes       CN_EMCI        Yes             0.82
+1129593 20231009-201330 100 0.001 0.0001   Yes           Yes          Yes       CN_LMCI_AD     Yes             0.86
+1129596 20231009-201654 100 0.001 0.0001   Yes           Yes          Yes       CN_MCI_AD      Yes             0.85
+1129680 20231009-220243 100 0.001 0.0001   Yes           Yes          Yes       CN_LMCI_AD     No              0.89
+1129961 20231009-201330 100 0.001 0.0001   Yes           Yes          Yes       CN_AD          No              0.91
+1129964 20231010-152359 100 0.001 0.0001   Yes           Yes          Yes       CN_LMCI        No              0.91
+1129983 20231010-153500 100 0.001 0.0001   Yes           Yes          Yes       LMCI_AD        No              0.96

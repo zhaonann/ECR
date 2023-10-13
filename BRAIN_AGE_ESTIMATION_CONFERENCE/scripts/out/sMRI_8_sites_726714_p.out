@@ -1,0 +1,583 @@
+Tue Aug  8 01:50:47 CST 2023
+Tue Aug  8 01:50:47 2023       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.57.02    Driver Version: 470.57.02    CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA A100 80G...  On   | 00000000:98:00.0 Off |                    0 |
+| N/A   27C    P0    43W / 300W |      0MiB / 81251MiB |      0%      Default |
+|                               |                      |             Disabled |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+----------------- Options ---------------
+                   GPU_no: 0                             
+                  GPU_num: 1                             
+               batch_size: 8                             
+                loss_func: MSE                           
+                     lr_s: 0.001                         
+              model_depth: 34                            
+                 n_epochs: 200                           
+                   n_exps: 1                             
+                     note:                               
+                  parsave: /public/bme/home/zhaonan/brain_age_est/codes/BRAIN_AGE_ESTIMATION_CONFERENCE/OUTPUT/threedim_3view-20230808-015231	[default: None]
+                     wd_s: 0.0001                        
+----------------- End -------------------
+******** Training on exp 1 ********
+08/08 01:52:33 AM sMRI, param size = 2.644 MB
+---------- Networks initialized -------------
+Threedim_3view_CNN(
+  (encoder3d): Encoder3d(
+    (pool1): MaxPool3d(kernel_size=(2, 2, 2), stride=(2, 2, 2), padding=0, dilation=1, ceil_mode=False)
+    (pool2): MaxPool3d(kernel_size=(2, 2, 2), stride=(2, 2, 2), padding=0, dilation=1, ceil_mode=False)
+    (pool3): MaxPool3d(kernel_size=(2, 2, 2), stride=(2, 2, 2), padding=0, dilation=1, ceil_mode=False)
+    (in_tr): InputTransition3d(
+      (conv1): Conv3d(1, 16, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+      (bn1): InstanceNorm3d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (activate1): ReLU(inplace=True)
+    )
+    (down_conv_bk2): Conv3D_Block(
+      (conv1): Sequential(
+        (0): Conv3d(16, 32, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+        (1): InstanceNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (2): ReLU()
+      )
+      (residual_upsampler): Conv3d(16, 32, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+    )
+    (down_conv_bk3): Conv3D_Block(
+      (conv1): Sequential(
+        (0): Conv3d(32, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+        (1): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (2): ReLU()
+      )
+      (residual_upsampler): Conv3d(32, 64, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+    )
+    (down_conv_bk4): Conv3D_Block(
+      (conv1): Sequential(
+        (0): Conv3d(64, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+        (1): InstanceNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (2): ReLU()
+      )
+      (residual_upsampler): Conv3d(64, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+    )
+    (block_1_pool): MaxPool3d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (block_2_1): Sequential(
+      (0): Conv3d(128, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+      (1): InstanceNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (2): ReLU()
+      (3): Conv3d(128, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+      (4): InstanceNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (5): ReLU()
+      (6): Conv3d(128, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+      (7): InstanceNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (8): ReLU()
+    )
+    (block_2_pool): MaxPool3d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (block_3_1): Sequential(
+      (0): AdaptiveAvgPool3d(output_size=1)
+      (1): Flatten(start_dim=1, end_dim=-1)
+      (2): Linear(in_features=128, out_features=128, bias=True)
+    )
+  )
+  (encoder_B): Encoder2d(
+    (pool1): MaxPool2d(kernel_size=(2, 2), stride=2, padding=0, dilation=1, ceil_mode=False)
+    (pool2): MaxPool2d(kernel_size=(2, 2), stride=2, padding=0, dilation=1, ceil_mode=False)
+    (pool3): MaxPool2d(kernel_size=(2, 2), stride=2, padding=0, dilation=1, ceil_mode=False)
+    (in_tr): InputTransition2d(
+      (conv1): Conv2d(1, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (bn1): InstanceNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (activate1): ReLU()
+    )
+    (down_conv_bk2): Conv2D_Block(
+      (conv1_blk): Sequential(
+        (0): Conv2d(16, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): InstanceNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (2): ReLU()
+      )
+      (downsample): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    )
+    (down_conv_bk3): Conv2D_Block(
+      (conv1_blk): Sequential(
+        (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): InstanceNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (2): ReLU()
+      )
+      (downsample): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    )
+    (down_conv_bk4): Conv2D_Block(
+      (conv1_blk): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (2): ReLU()
+      )
+      (downsample): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    )
+    (block_1_pool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (block_2_1): Sequential(
+      (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (2): ReLU()
+      (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (4): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (5): ReLU()
+      (6): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (7): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (8): ReLU()
+    )
+    (block_2_pool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (block_3_1): Sequential(
+      (0): AdaptiveAvgPool2d(output_size=1)
+      (1): Flatten(start_dim=1, end_dim=-1)
+      (2): Linear(in_features=128, out_features=128, bias=True)
+    )
+  )
+  (kv_block): Sequential(
+    (0): ReLU()
+    (1): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (q1_block): Sequential(
+    (0): ReLU()
+    (1): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (q2_block): Sequential(
+    (0): ReLU()
+    (1): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (q3_block): Sequential(
+    (0): ReLU()
+    (1): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (multihead_attn1): MultiheadAttention(
+    (out_proj): NonDynamicallyQuantizableLinear(in_features=128, out_features=128, bias=True)
+  )
+  (multihead_attn2): MultiheadAttention(
+    (out_proj): NonDynamicallyQuantizableLinear(in_features=128, out_features=128, bias=True)
+  )
+  (multihead_attn3): MultiheadAttention(
+    (out_proj): NonDynamicallyQuantizableLinear(in_features=128, out_features=128, bias=True)
+  )
+  (fusion_blk): Sequential(
+    (0): Linear(in_features=512, out_features=256, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=256, out_features=128, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[Network sMRI] Total number of parameters : 2.644 M
+[Network sMRI] Total number of trainable parameters : 2.644 M
+-----------------------------------------------
+Load pretrain 3d model!
+08/08 01:56:31 AM ******* Epoch 1, Train Loss 18.78, Val Loss 8.35, Train MAE 2.84, Val MAE 2.95 *******
+End of epoch 1 / 200 	 Time Taken: 237 sec
+08/08 02:00:28 AM ******* Epoch 2, Train Loss 4.16, Val Loss 9.32, Train MAE 2.22, Val MAE 3.22 *******
+End of epoch 2 / 200 	 Time Taken: 236 sec
+08/08 02:04:29 AM ******* Epoch 3, Train Loss 5.33, Val Loss 13.92, Train MAE 2.51, Val MAE 3.60 *******
+End of epoch 3 / 200 	 Time Taken: 241 sec
+08/08 02:08:25 AM ******* Epoch 4, Train Loss 4.01, Val Loss 11.32, Train MAE 2.19, Val MAE 3.81 *******
+End of epoch 4 / 200 	 Time Taken: 236 sec
+08/08 02:12:21 AM ******* Epoch 5, Train Loss 4.69, Val Loss 10.13, Train MAE 2.38, Val MAE 3.54 *******
+End of epoch 5 / 200 	 Time Taken: 235 sec
+08/08 02:16:16 AM ******* Epoch 6, Train Loss 4.79, Val Loss 9.81, Train MAE 2.40, Val MAE 3.38 *******
+End of epoch 6 / 200 	 Time Taken: 234 sec
+08/08 02:20:09 AM ******* Epoch 7, Train Loss 4.18, Val Loss 10.43, Train MAE 2.23, Val MAE 3.29 *******
+End of epoch 7 / 200 	 Time Taken: 233 sec
+08/08 02:24:04 AM ******* Epoch 8, Train Loss 5.03, Val Loss 8.81, Train MAE 2.47, Val MAE 3.16 *******
+End of epoch 8 / 200 	 Time Taken: 234 sec
+08/08 02:28:00 AM ******* Epoch 9, Train Loss 5.12, Val Loss 12.30, Train MAE 2.51, Val MAE 3.79 *******
+End of epoch 9 / 200 	 Time Taken: 236 sec
+08/08 02:31:56 AM ******* Epoch 10, Train Loss 4.74, Val Loss 10.79, Train MAE 2.37, Val MAE 3.47 *******
+End of epoch 10 / 200 	 Time Taken: 235 sec
+08/08 02:35:58 AM ******* Epoch 11, Train Loss 5.10, Val Loss 13.46, Train MAE 2.48, Val MAE 3.95 *******
+End of epoch 11 / 200 	 Time Taken: 242 sec
+08/08 02:39:54 AM ******* Epoch 12, Train Loss 4.49, Val Loss 17.51, Train MAE 2.31, Val MAE 4.47 *******
+End of epoch 12 / 200 	 Time Taken: 236 sec
+08/08 02:43:53 AM ******* Epoch 13, Train Loss 4.52, Val Loss 10.99, Train MAE 2.31, Val MAE 3.34 *******
+End of epoch 13 / 200 	 Time Taken: 238 sec
+08/08 02:47:52 AM ******* Epoch 14, Train Loss 4.43, Val Loss 10.36, Train MAE 2.29, Val MAE 3.45 *******
+End of epoch 14 / 200 	 Time Taken: 239 sec
+08/08 02:51:51 AM ******* Epoch 15, Train Loss 4.52, Val Loss 10.21, Train MAE 2.32, Val MAE 3.23 *******
+End of epoch 15 / 200 	 Time Taken: 238 sec
+08/08 02:55:52 AM ******* Epoch 16, Train Loss 3.95, Val Loss 11.51, Train MAE 2.16, Val MAE 3.81 *******
+End of epoch 16 / 200 	 Time Taken: 240 sec
+08/08 02:59:55 AM ******* Epoch 17, Train Loss 4.03, Val Loss 8.86, Train MAE 2.21, Val MAE 3.14 *******
+End of epoch 17 / 200 	 Time Taken: 243 sec
+08/08 03:03:58 AM ******* Epoch 18, Train Loss 3.97, Val Loss 9.61, Train MAE 2.21, Val MAE 3.26 *******
+End of epoch 18 / 200 	 Time Taken: 243 sec
+08/08 03:08:05 AM ******* Epoch 19, Train Loss 4.75, Val Loss 8.76, Train MAE 2.37, Val MAE 3.14 *******
+End of epoch 19 / 200 	 Time Taken: 246 sec
+08/08 03:12:07 AM ******* Epoch 20, Train Loss 4.00, Val Loss 11.54, Train MAE 2.17, Val MAE 3.30 *******
+End of epoch 20 / 200 	 Time Taken: 242 sec
+08/08 03:16:10 AM ******* Epoch 21, Train Loss 4.83, Val Loss 30.41, Train MAE 2.37, Val MAE 6.55 *******
+End of epoch 21 / 200 	 Time Taken: 242 sec
+08/08 03:20:09 AM ******* Epoch 22, Train Loss 3.96, Val Loss 8.04, Train MAE 2.18, Val MAE 2.94 *******
+End of epoch 22 / 200 	 Time Taken: 239 sec
+08/08 03:24:09 AM ******* Epoch 23, Train Loss 3.26, Val Loss 8.78, Train MAE 1.98, Val MAE 3.11 *******
+End of epoch 23 / 200 	 Time Taken: 239 sec
+08/08 03:28:10 AM ******* Epoch 24, Train Loss 3.42, Val Loss 8.69, Train MAE 2.02, Val MAE 3.13 *******
+End of epoch 24 / 200 	 Time Taken: 241 sec
+08/08 03:32:12 AM ******* Epoch 25, Train Loss 3.76, Val Loss 8.36, Train MAE 2.11, Val MAE 3.03 *******
+End of epoch 25 / 200 	 Time Taken: 241 sec
+08/08 03:36:14 AM ******* Epoch 26, Train Loss 3.81, Val Loss 9.91, Train MAE 2.13, Val MAE 3.52 *******
+End of epoch 26 / 200 	 Time Taken: 242 sec
+08/08 03:40:21 AM ******* Epoch 27, Train Loss 3.62, Val Loss 8.10, Train MAE 2.07, Val MAE 3.04 *******
+End of epoch 27 / 200 	 Time Taken: 247 sec
+08/08 03:44:25 AM ******* Epoch 28, Train Loss 3.55, Val Loss 8.50, Train MAE 2.04, Val MAE 3.11 *******
+End of epoch 28 / 200 	 Time Taken: 243 sec
+08/08 03:48:28 AM ******* Epoch 29, Train Loss 3.20, Val Loss 9.01, Train MAE 1.97, Val MAE 3.08 *******
+End of epoch 29 / 200 	 Time Taken: 243 sec
+08/08 03:52:35 AM ******* Epoch 30, Train Loss 3.08, Val Loss 12.32, Train MAE 1.92, Val MAE 3.54 *******
+End of epoch 30 / 200 	 Time Taken: 246 sec
+08/08 03:56:37 AM ******* Epoch 31, Train Loss 3.24, Val Loss 8.41, Train MAE 1.96, Val MAE 3.07 *******
+End of epoch 31 / 200 	 Time Taken: 241 sec
+08/08 04:00:39 AM ******* Epoch 32, Train Loss 3.39, Val Loss 8.33, Train MAE 2.00, Val MAE 3.09 *******
+End of epoch 32 / 200 	 Time Taken: 242 sec
+08/08 04:04:41 AM ******* Epoch 33, Train Loss 3.43, Val Loss 16.18, Train MAE 2.01, Val MAE 4.40 *******
+End of epoch 33 / 200 	 Time Taken: 241 sec
+08/08 04:08:40 AM ******* Epoch 34, Train Loss 3.36, Val Loss 8.69, Train MAE 2.00, Val MAE 3.19 *******
+End of epoch 34 / 200 	 Time Taken: 238 sec
+08/08 04:12:40 AM ******* Epoch 35, Train Loss 3.32, Val Loss 9.14, Train MAE 1.99, Val MAE 3.17 *******
+End of epoch 35 / 200 	 Time Taken: 240 sec
+08/08 04:16:41 AM ******* Epoch 36, Train Loss 2.75, Val Loss 8.02, Train MAE 1.81, Val MAE 2.96 *******
+End of epoch 36 / 200 	 Time Taken: 241 sec
+08/08 04:20:44 AM ******* Epoch 37, Train Loss 3.23, Val Loss 8.30, Train MAE 1.97, Val MAE 2.93 *******
+End of epoch 37 / 200 	 Time Taken: 242 sec
+08/08 04:24:46 AM ******* Epoch 38, Train Loss 2.88, Val Loss 9.91, Train MAE 1.84, Val MAE 3.14 *******
+End of epoch 38 / 200 	 Time Taken: 242 sec
+08/08 04:28:46 AM ******* Epoch 39, Train Loss 2.98, Val Loss 10.54, Train MAE 1.86, Val MAE 3.43 *******
+End of epoch 39 / 200 	 Time Taken: 239 sec
+08/08 04:32:48 AM ******* Epoch 40, Train Loss 2.69, Val Loss 9.62, Train MAE 1.77, Val MAE 3.32 *******
+End of epoch 40 / 200 	 Time Taken: 242 sec
+08/08 04:36:52 AM ******* Epoch 41, Train Loss 2.80, Val Loss 8.58, Train MAE 1.82, Val MAE 3.06 *******
+End of epoch 41 / 200 	 Time Taken: 243 sec
+08/08 04:40:57 AM ******* Epoch 42, Train Loss 2.65, Val Loss 8.67, Train MAE 1.76, Val MAE 3.19 *******
+End of epoch 42 / 200 	 Time Taken: 245 sec
+08/08 04:44:59 AM ******* Epoch 43, Train Loss 2.83, Val Loss 9.23, Train MAE 1.83, Val MAE 3.21 *******
+End of epoch 43 / 200 	 Time Taken: 242 sec
+08/08 04:48:59 AM ******* Epoch 44, Train Loss 2.40, Val Loss 8.85, Train MAE 1.70, Val MAE 3.08 *******
+End of epoch 44 / 200 	 Time Taken: 239 sec
+08/08 04:53:01 AM ******* Epoch 45, Train Loss 2.55, Val Loss 9.29, Train MAE 1.76, Val MAE 3.18 *******
+End of epoch 45 / 200 	 Time Taken: 242 sec
+08/08 04:57:03 AM ******* Epoch 46, Train Loss 2.45, Val Loss 9.02, Train MAE 1.72, Val MAE 3.25 *******
+End of epoch 46 / 200 	 Time Taken: 241 sec
+08/08 05:01:04 AM ******* Epoch 47, Train Loss 2.86, Val Loss 8.76, Train MAE 1.83, Val MAE 3.08 *******
+End of epoch 47 / 200 	 Time Taken: 240 sec
+08/08 05:05:06 AM ******* Epoch 48, Train Loss 2.48, Val Loss 8.11, Train MAE 1.73, Val MAE 3.02 *******
+End of epoch 48 / 200 	 Time Taken: 242 sec
+08/08 05:09:05 AM ******* Epoch 49, Train Loss 2.33, Val Loss 9.84, Train MAE 1.68, Val MAE 3.13 *******
+End of epoch 49 / 200 	 Time Taken: 238 sec
+08/08 05:13:05 AM ******* Epoch 50, Train Loss 2.40, Val Loss 10.53, Train MAE 1.71, Val MAE 3.40 *******
+End of epoch 50 / 200 	 Time Taken: 239 sec
+08/08 05:17:05 AM ******* Epoch 51, Train Loss 2.68, Val Loss 9.67, Train MAE 1.79, Val MAE 3.25 *******
+End of epoch 51 / 200 	 Time Taken: 240 sec
+08/08 05:21:08 AM ******* Epoch 52, Train Loss 2.38, Val Loss 8.82, Train MAE 1.70, Val MAE 3.25 *******
+End of epoch 52 / 200 	 Time Taken: 242 sec
+08/08 05:25:10 AM ******* Epoch 53, Train Loss 2.68, Val Loss 8.58, Train MAE 1.78, Val MAE 3.17 *******
+End of epoch 53 / 200 	 Time Taken: 242 sec
+08/08 05:29:10 AM ******* Epoch 54, Train Loss 2.21, Val Loss 8.74, Train MAE 1.61, Val MAE 3.19 *******
+End of epoch 54 / 200 	 Time Taken: 239 sec
+08/08 05:33:08 AM ******* Epoch 55, Train Loss 2.41, Val Loss 8.55, Train MAE 1.69, Val MAE 3.23 *******
+End of epoch 55 / 200 	 Time Taken: 238 sec
+08/08 05:37:07 AM ******* Epoch 56, Train Loss 2.36, Val Loss 7.99, Train MAE 1.69, Val MAE 2.97 *******
+End of epoch 56 / 200 	 Time Taken: 238 sec
+08/08 05:41:08 AM ******* Epoch 57, Train Loss 2.37, Val Loss 9.20, Train MAE 1.69, Val MAE 3.08 *******
+End of epoch 57 / 200 	 Time Taken: 241 sec
+08/08 05:45:08 AM ******* Epoch 58, Train Loss 2.20, Val Loss 8.12, Train MAE 1.61, Val MAE 2.87 *******
+End of epoch 58 / 200 	 Time Taken: 239 sec
+08/08 05:49:07 AM ******* Epoch 59, Train Loss 1.88, Val Loss 8.38, Train MAE 1.49, Val MAE 3.01 *******
+End of epoch 59 / 200 	 Time Taken: 238 sec
+08/08 05:53:09 AM ******* Epoch 60, Train Loss 1.93, Val Loss 8.22, Train MAE 1.52, Val MAE 3.00 *******
+End of epoch 60 / 200 	 Time Taken: 242 sec
+08/08 05:57:12 AM ******* Epoch 61, Train Loss 2.13, Val Loss 8.71, Train MAE 1.60, Val MAE 3.02 *******
+End of epoch 61 / 200 	 Time Taken: 242 sec
+08/08 06:01:14 AM ******* Epoch 62, Train Loss 2.08, Val Loss 9.59, Train MAE 1.58, Val MAE 3.26 *******
+End of epoch 62 / 200 	 Time Taken: 242 sec
+08/08 06:05:12 AM ******* Epoch 63, Train Loss 1.94, Val Loss 8.30, Train MAE 1.53, Val MAE 2.99 *******
+End of epoch 63 / 200 	 Time Taken: 237 sec
+08/08 06:09:11 AM ******* Epoch 64, Train Loss 1.82, Val Loss 7.85, Train MAE 1.49, Val MAE 2.89 *******
+End of epoch 64 / 200 	 Time Taken: 238 sec
+08/08 06:13:10 AM ******* Epoch 65, Train Loss 1.97, Val Loss 9.56, Train MAE 1.51, Val MAE 2.95 *******
+End of epoch 65 / 200 	 Time Taken: 239 sec
+08/08 06:17:11 AM ******* Epoch 66, Train Loss 2.07, Val Loss 8.51, Train MAE 1.57, Val MAE 3.01 *******
+End of epoch 66 / 200 	 Time Taken: 241 sec
+08/08 06:21:09 AM ******* Epoch 67, Train Loss 2.44, Val Loss 9.78, Train MAE 1.68, Val MAE 3.38 *******
+End of epoch 67 / 200 	 Time Taken: 238 sec
+08/08 06:25:12 AM ******* Epoch 68, Train Loss 1.91, Val Loss 9.46, Train MAE 1.51, Val MAE 3.10 *******
+End of epoch 68 / 200 	 Time Taken: 242 sec
+08/08 06:29:12 AM ******* Epoch 69, Train Loss 2.03, Val Loss 8.81, Train MAE 1.54, Val MAE 3.10 *******
+End of epoch 69 / 200 	 Time Taken: 240 sec
+08/08 06:33:16 AM ******* Epoch 70, Train Loss 2.08, Val Loss 7.76, Train MAE 1.57, Val MAE 2.92 *******
+End of epoch 70 / 200 	 Time Taken: 243 sec
+08/08 06:37:20 AM ******* Epoch 71, Train Loss 1.78, Val Loss 9.76, Train MAE 1.46, Val MAE 2.90 *******
+End of epoch 71 / 200 	 Time Taken: 244 sec
+08/08 06:41:19 AM ******* Epoch 72, Train Loss 1.92, Val Loss 8.50, Train MAE 1.52, Val MAE 2.93 *******
+End of epoch 72 / 200 	 Time Taken: 239 sec
+08/08 06:45:19 AM ******* Epoch 73, Train Loss 1.96, Val Loss 7.69, Train MAE 1.51, Val MAE 2.87 *******
+End of epoch 73 / 200 	 Time Taken: 240 sec
+08/08 06:49:24 AM ******* Epoch 74, Train Loss 1.57, Val Loss 12.09, Train MAE 1.36, Val MAE 3.67 *******
+End of epoch 74 / 200 	 Time Taken: 244 sec
+08/08 06:53:26 AM ******* Epoch 75, Train Loss 1.52, Val Loss 10.63, Train MAE 1.36, Val MAE 3.36 *******
+End of epoch 75 / 200 	 Time Taken: 241 sec
+08/08 06:57:30 AM ******* Epoch 76, Train Loss 1.64, Val Loss 11.47, Train MAE 1.40, Val MAE 3.12 *******
+End of epoch 76 / 200 	 Time Taken: 244 sec
+08/08 07:01:30 AM ******* Epoch 77, Train Loss 1.67, Val Loss 7.70, Train MAE 1.41, Val MAE 2.97 *******
+End of epoch 77 / 200 	 Time Taken: 240 sec
+08/08 07:05:28 AM ******* Epoch 78, Train Loss 1.55, Val Loss 8.12, Train MAE 1.36, Val MAE 3.05 *******
+End of epoch 78 / 200 	 Time Taken: 237 sec
+08/08 07:09:26 AM ******* Epoch 79, Train Loss 1.57, Val Loss 8.07, Train MAE 1.36, Val MAE 3.02 *******
+End of epoch 79 / 200 	 Time Taken: 237 sec
+08/08 07:13:23 AM ******* Epoch 80, Train Loss 1.71, Val Loss 8.21, Train MAE 1.43, Val MAE 2.91 *******
+End of epoch 80 / 200 	 Time Taken: 236 sec
+08/08 07:17:20 AM ******* Epoch 81, Train Loss 1.50, Val Loss 8.32, Train MAE 1.35, Val MAE 3.00 *******
+End of epoch 81 / 200 	 Time Taken: 237 sec
+08/08 07:21:18 AM ******* Epoch 82, Train Loss 1.44, Val Loss 7.84, Train MAE 1.30, Val MAE 2.89 *******
+End of epoch 82 / 200 	 Time Taken: 238 sec
+08/08 07:25:19 AM ******* Epoch 83, Train Loss 1.30, Val Loss 7.39, Train MAE 1.23, Val MAE 2.84 *******
+End of epoch 83 / 200 	 Time Taken: 240 sec
+08/08 07:29:18 AM ******* Epoch 84, Train Loss 1.45, Val Loss 7.94, Train MAE 1.31, Val MAE 2.95 *******
+End of epoch 84 / 200 	 Time Taken: 239 sec
+08/08 07:33:22 AM ******* Epoch 85, Train Loss 1.42, Val Loss 7.88, Train MAE 1.30, Val MAE 2.85 *******
+End of epoch 85 / 200 	 Time Taken: 244 sec
+08/08 07:37:25 AM ******* Epoch 86, Train Loss 1.31, Val Loss 8.11, Train MAE 1.24, Val MAE 2.96 *******
+End of epoch 86 / 200 	 Time Taken: 243 sec
+08/08 07:41:25 AM ******* Epoch 87, Train Loss 1.49, Val Loss 7.83, Train MAE 1.33, Val MAE 3.00 *******
+End of epoch 87 / 200 	 Time Taken: 239 sec
+08/08 07:45:25 AM ******* Epoch 88, Train Loss 1.35, Val Loss 8.29, Train MAE 1.25, Val MAE 2.97 *******
+End of epoch 88 / 200 	 Time Taken: 240 sec
+08/08 07:49:26 AM ******* Epoch 89, Train Loss 1.42, Val Loss 9.08, Train MAE 1.29, Val MAE 3.11 *******
+End of epoch 89 / 200 	 Time Taken: 240 sec
+08/08 07:53:27 AM ******* Epoch 90, Train Loss 1.18, Val Loss 7.81, Train MAE 1.19, Val MAE 3.01 *******
+End of epoch 90 / 200 	 Time Taken: 241 sec
+08/08 07:57:23 AM ******* Epoch 91, Train Loss 1.30, Val Loss 8.26, Train MAE 1.24, Val MAE 2.99 *******
+End of epoch 91 / 200 	 Time Taken: 236 sec
+08/08 08:01:18 AM ******* Epoch 92, Train Loss 1.25, Val Loss 9.63, Train MAE 1.21, Val MAE 3.15 *******
+End of epoch 92 / 200 	 Time Taken: 235 sec
+08/08 08:05:13 AM ******* Epoch 93, Train Loss 1.41, Val Loss 7.57, Train MAE 1.28, Val MAE 2.95 *******
+End of epoch 93 / 200 	 Time Taken: 234 sec
+08/08 08:09:08 AM ******* Epoch 94, Train Loss 1.15, Val Loss 8.03, Train MAE 1.16, Val MAE 2.88 *******
+End of epoch 94 / 200 	 Time Taken: 235 sec
+08/08 08:13:03 AM ******* Epoch 95, Train Loss 1.23, Val Loss 7.85, Train MAE 1.19, Val MAE 2.87 *******
+End of epoch 95 / 200 	 Time Taken: 234 sec
+08/08 08:16:55 AM ******* Epoch 96, Train Loss 1.08, Val Loss 9.51, Train MAE 1.12, Val MAE 3.14 *******
+End of epoch 96 / 200 	 Time Taken: 232 sec
+08/08 08:20:48 AM ******* Epoch 97, Train Loss 1.36, Val Loss 8.45, Train MAE 1.26, Val MAE 2.99 *******
+End of epoch 97 / 200 	 Time Taken: 233 sec
+08/08 08:24:41 AM ******* Epoch 98, Train Loss 1.17, Val Loss 8.18, Train MAE 1.17, Val MAE 3.04 *******
+End of epoch 98 / 200 	 Time Taken: 232 sec
+08/08 08:28:33 AM ******* Epoch 99, Train Loss 1.19, Val Loss 7.86, Train MAE 1.18, Val MAE 2.88 *******
+End of epoch 99 / 200 	 Time Taken: 231 sec
+08/08 08:32:27 AM ******* Epoch 100, Train Loss 1.22, Val Loss 7.98, Train MAE 1.20, Val MAE 2.96 *******
+End of epoch 100 / 200 	 Time Taken: 234 sec
+08/08 08:36:22 AM ******* Epoch 101, Train Loss 1.07, Val Loss 8.06, Train MAE 1.12, Val MAE 3.06 *******
+End of epoch 101 / 200 	 Time Taken: 235 sec
+08/08 08:40:18 AM ******* Epoch 102, Train Loss 1.11, Val Loss 8.35, Train MAE 1.13, Val MAE 3.01 *******
+End of epoch 102 / 200 	 Time Taken: 236 sec
+08/08 08:44:12 AM ******* Epoch 103, Train Loss 1.09, Val Loss 8.79, Train MAE 1.14, Val MAE 3.12 *******
+End of epoch 103 / 200 	 Time Taken: 233 sec
+08/08 08:48:05 AM ******* Epoch 104, Train Loss 0.96, Val Loss 8.21, Train MAE 1.05, Val MAE 2.94 *******
+End of epoch 104 / 200 	 Time Taken: 233 sec
+08/08 08:51:58 AM ******* Epoch 105, Train Loss 0.96, Val Loss 8.01, Train MAE 1.06, Val MAE 3.06 *******
+End of epoch 105 / 200 	 Time Taken: 232 sec
+08/08 08:55:51 AM ******* Epoch 106, Train Loss 1.10, Val Loss 8.17, Train MAE 1.12, Val MAE 2.96 *******
+End of epoch 106 / 200 	 Time Taken: 232 sec
+08/08 08:59:41 AM ******* Epoch 107, Train Loss 1.07, Val Loss 9.18, Train MAE 1.13, Val MAE 2.85 *******
+End of epoch 107 / 200 	 Time Taken: 229 sec
+08/08 09:03:32 AM ******* Epoch 108, Train Loss 0.97, Val Loss 7.88, Train MAE 1.07, Val MAE 2.84 *******
+End of epoch 108 / 200 	 Time Taken: 230 sec
+08/08 09:07:24 AM ******* Epoch 109, Train Loss 0.98, Val Loss 7.33, Train MAE 1.06, Val MAE 2.82 *******
+End of epoch 109 / 200 	 Time Taken: 232 sec
+08/08 09:11:17 AM ******* Epoch 110, Train Loss 0.94, Val Loss 8.22, Train MAE 1.05, Val MAE 2.91 *******
+End of epoch 110 / 200 	 Time Taken: 233 sec
+08/08 09:15:09 AM ******* Epoch 111, Train Loss 1.01, Val Loss 7.32, Train MAE 1.09, Val MAE 2.80 *******
+End of epoch 111 / 200 	 Time Taken: 231 sec
+08/08 09:19:05 AM ******* Epoch 112, Train Loss 0.80, Val Loss 7.79, Train MAE 0.96, Val MAE 2.86 *******
+End of epoch 112 / 200 	 Time Taken: 235 sec
+08/08 09:22:57 AM ******* Epoch 113, Train Loss 0.91, Val Loss 7.47, Train MAE 1.01, Val MAE 2.82 *******
+End of epoch 113 / 200 	 Time Taken: 232 sec
+08/08 09:26:48 AM ******* Epoch 114, Train Loss 0.85, Val Loss 7.30, Train MAE 0.99, Val MAE 2.83 *******
+End of epoch 114 / 200 	 Time Taken: 231 sec
+08/08 09:30:41 AM ******* Epoch 115, Train Loss 0.90, Val Loss 7.54, Train MAE 1.02, Val MAE 2.94 *******
+End of epoch 115 / 200 	 Time Taken: 232 sec
+08/08 09:34:34 AM ******* Epoch 116, Train Loss 0.83, Val Loss 7.20, Train MAE 0.97, Val MAE 2.79 *******
+End of epoch 116 / 200 	 Time Taken: 233 sec
+08/08 09:38:27 AM ******* Epoch 117, Train Loss 0.78, Val Loss 7.22, Train MAE 0.94, Val MAE 2.78 *******
+End of epoch 117 / 200 	 Time Taken: 232 sec
+08/08 09:42:17 AM ******* Epoch 118, Train Loss 0.86, Val Loss 8.34, Train MAE 1.00, Val MAE 3.03 *******
+End of epoch 118 / 200 	 Time Taken: 230 sec
+08/08 09:46:07 AM ******* Epoch 119, Train Loss 0.85, Val Loss 9.60, Train MAE 0.99, Val MAE 2.83 *******
+End of epoch 119 / 200 	 Time Taken: 230 sec
+08/08 09:50:01 AM ******* Epoch 120, Train Loss 0.79, Val Loss 7.15, Train MAE 0.94, Val MAE 2.75 *******
+End of epoch 120 / 200 	 Time Taken: 233 sec
+08/08 09:53:55 AM ******* Epoch 121, Train Loss 0.79, Val Loss 7.57, Train MAE 0.96, Val MAE 2.78 *******
+End of epoch 121 / 200 	 Time Taken: 234 sec
+08/08 09:57:47 AM ******* Epoch 122, Train Loss 0.72, Val Loss 7.13, Train MAE 0.92, Val MAE 2.78 *******
+End of epoch 122 / 200 	 Time Taken: 232 sec
+08/08 10:01:37 AM ******* Epoch 123, Train Loss 0.80, Val Loss 7.47, Train MAE 0.96, Val MAE 2.82 *******
+End of epoch 123 / 200 	 Time Taken: 230 sec
+08/08 10:05:29 AM ******* Epoch 124, Train Loss 0.74, Val Loss 7.62, Train MAE 0.92, Val MAE 2.85 *******
+End of epoch 124 / 200 	 Time Taken: 231 sec
+08/08 10:09:21 AM ******* Epoch 125, Train Loss 0.69, Val Loss 7.29, Train MAE 0.89, Val MAE 2.73 *******
+End of epoch 125 / 200 	 Time Taken: 232 sec
+08/08 10:13:13 AM ******* Epoch 126, Train Loss 0.70, Val Loss 7.74, Train MAE 0.90, Val MAE 2.84 *******
+End of epoch 126 / 200 	 Time Taken: 232 sec
+08/08 10:17:06 AM ******* Epoch 127, Train Loss 0.68, Val Loss 7.96, Train MAE 0.88, Val MAE 2.84 *******
+End of epoch 127 / 200 	 Time Taken: 232 sec
+08/08 10:20:56 AM ******* Epoch 128, Train Loss 0.62, Val Loss 7.61, Train MAE 0.84, Val MAE 2.77 *******
+End of epoch 128 / 200 	 Time Taken: 229 sec
+08/08 10:24:48 AM ******* Epoch 129, Train Loss 0.65, Val Loss 7.44, Train MAE 0.86, Val MAE 2.72 *******
+End of epoch 129 / 200 	 Time Taken: 231 sec
+08/08 10:28:42 AM ******* Epoch 130, Train Loss 0.68, Val Loss 7.19, Train MAE 0.88, Val MAE 2.85 *******
+End of epoch 130 / 200 	 Time Taken: 234 sec
+08/08 10:32:35 AM ******* Epoch 131, Train Loss 0.69, Val Loss 7.59, Train MAE 0.88, Val MAE 2.80 *******
+End of epoch 131 / 200 	 Time Taken: 232 sec
+08/08 10:36:27 AM ******* Epoch 132, Train Loss 0.64, Val Loss 7.54, Train MAE 0.85, Val MAE 2.75 *******
+End of epoch 132 / 200 	 Time Taken: 231 sec
+08/08 10:40:22 AM ******* Epoch 133, Train Loss 0.67, Val Loss 7.19, Train MAE 0.88, Val MAE 2.71 *******
+End of epoch 133 / 200 	 Time Taken: 235 sec
+08/08 10:44:15 AM ******* Epoch 134, Train Loss 0.57, Val Loss 7.28, Train MAE 0.80, Val MAE 2.80 *******
+End of epoch 134 / 200 	 Time Taken: 232 sec
+08/08 10:48:08 AM ******* Epoch 135, Train Loss 0.58, Val Loss 7.04, Train MAE 0.80, Val MAE 2.71 *******
+End of epoch 135 / 200 	 Time Taken: 232 sec
+08/08 10:51:58 AM ******* Epoch 136, Train Loss 0.56, Val Loss 7.47, Train MAE 0.79, Val MAE 2.73 *******
+End of epoch 136 / 200 	 Time Taken: 230 sec
+08/08 10:55:50 AM ******* Epoch 137, Train Loss 0.60, Val Loss 7.23, Train MAE 0.83, Val MAE 2.78 *******
+End of epoch 137 / 200 	 Time Taken: 231 sec
+08/08 10:59:44 AM ******* Epoch 138, Train Loss 0.58, Val Loss 7.25, Train MAE 0.81, Val MAE 2.73 *******
+End of epoch 138 / 200 	 Time Taken: 233 sec
+08/08 11:03:37 AM ******* Epoch 139, Train Loss 0.57, Val Loss 7.33, Train MAE 0.81, Val MAE 2.76 *******
+End of epoch 139 / 200 	 Time Taken: 233 sec
+08/08 11:07:30 AM ******* Epoch 140, Train Loss 0.54, Val Loss 7.40, Train MAE 0.79, Val MAE 2.76 *******
+End of epoch 140 / 200 	 Time Taken: 232 sec
+08/08 11:11:24 AM ******* Epoch 141, Train Loss 0.57, Val Loss 7.45, Train MAE 0.80, Val MAE 2.77 *******
+End of epoch 141 / 200 	 Time Taken: 234 sec
+08/08 11:15:15 AM ******* Epoch 142, Train Loss 0.57, Val Loss 7.56, Train MAE 0.79, Val MAE 2.75 *******
+End of epoch 142 / 200 	 Time Taken: 231 sec
+08/08 11:19:06 AM ******* Epoch 143, Train Loss 0.51, Val Loss 7.44, Train MAE 0.76, Val MAE 2.75 *******
+End of epoch 143 / 200 	 Time Taken: 231 sec
+08/08 11:22:58 AM ******* Epoch 144, Train Loss 0.48, Val Loss 7.30, Train MAE 0.72, Val MAE 2.76 *******
+End of epoch 144 / 200 	 Time Taken: 232 sec
+08/08 11:26:51 AM ******* Epoch 145, Train Loss 0.52, Val Loss 7.48, Train MAE 0.75, Val MAE 2.75 *******
+End of epoch 145 / 200 	 Time Taken: 232 sec
+08/08 11:30:41 AM ******* Epoch 146, Train Loss 0.52, Val Loss 7.31, Train MAE 0.75, Val MAE 2.72 *******
+End of epoch 146 / 200 	 Time Taken: 230 sec
+08/08 11:34:32 AM ******* Epoch 147, Train Loss 0.49, Val Loss 8.00, Train MAE 0.73, Val MAE 2.81 *******
+End of epoch 147 / 200 	 Time Taken: 230 sec
+08/08 11:38:25 AM ******* Epoch 148, Train Loss 0.51, Val Loss 7.27, Train MAE 0.74, Val MAE 2.73 *******
+End of epoch 148 / 200 	 Time Taken: 232 sec
+08/08 11:42:19 AM ******* Epoch 149, Train Loss 0.49, Val Loss 7.42, Train MAE 0.73, Val MAE 2.71 *******
+End of epoch 149 / 200 	 Time Taken: 234 sec
+08/08 11:46:12 AM ******* Epoch 150, Train Loss 0.50, Val Loss 7.21, Train MAE 0.75, Val MAE 2.72 *******
+End of epoch 150 / 200 	 Time Taken: 232 sec
+08/08 11:50:07 AM ******* Epoch 151, Train Loss 0.46, Val Loss 7.14, Train MAE 0.70, Val MAE 2.69 *******
+End of epoch 151 / 200 	 Time Taken: 234 sec
+08/08 11:54:00 AM ******* Epoch 152, Train Loss 0.45, Val Loss 7.06, Train MAE 0.69, Val MAE 2.71 *******
+End of epoch 152 / 200 	 Time Taken: 232 sec
+08/08 11:57:54 AM ******* Epoch 153, Train Loss 0.43, Val Loss 7.29, Train MAE 0.70, Val MAE 2.68 *******
+End of epoch 153 / 200 	 Time Taken: 234 sec
+08/08 12:01:46 PM ******* Epoch 154, Train Loss 0.44, Val Loss 7.46, Train MAE 0.69, Val MAE 2.76 *******
+End of epoch 154 / 200 	 Time Taken: 232 sec
+08/08 12:05:40 PM ******* Epoch 155, Train Loss 0.46, Val Loss 7.20, Train MAE 0.70, Val MAE 2.69 *******
+End of epoch 155 / 200 	 Time Taken: 233 sec
+08/08 12:09:33 PM ******* Epoch 156, Train Loss 0.42, Val Loss 7.22, Train MAE 0.67, Val MAE 2.69 *******
+End of epoch 156 / 200 	 Time Taken: 233 sec
+08/08 12:13:25 PM ******* Epoch 157, Train Loss 0.42, Val Loss 6.91, Train MAE 0.67, Val MAE 2.67 *******
+End of epoch 157 / 200 	 Time Taken: 232 sec
+08/08 12:17:18 PM ******* Epoch 158, Train Loss 0.42, Val Loss 7.16, Train MAE 0.67, Val MAE 2.67 *******
+End of epoch 158 / 200 	 Time Taken: 232 sec
+08/08 12:21:10 PM ******* Epoch 159, Train Loss 0.45, Val Loss 7.08, Train MAE 0.70, Val MAE 2.69 *******
+End of epoch 159 / 200 	 Time Taken: 232 sec
+08/08 12:25:03 PM ******* Epoch 160, Train Loss 0.43, Val Loss 7.11, Train MAE 0.67, Val MAE 2.70 *******
+End of epoch 160 / 200 	 Time Taken: 232 sec
+08/08 12:28:55 PM ******* Epoch 161, Train Loss 0.41, Val Loss 7.34, Train MAE 0.66, Val MAE 2.72 *******
+End of epoch 161 / 200 	 Time Taken: 232 sec
+08/08 12:32:47 PM ******* Epoch 162, Train Loss 0.39, Val Loss 7.15, Train MAE 0.64, Val MAE 2.67 *******
+End of epoch 162 / 200 	 Time Taken: 231 sec
+08/08 12:36:40 PM ******* Epoch 163, Train Loss 0.40, Val Loss 7.19, Train MAE 0.65, Val MAE 2.73 *******
+End of epoch 163 / 200 	 Time Taken: 232 sec
+08/08 12:40:31 PM ******* Epoch 164, Train Loss 0.41, Val Loss 7.03, Train MAE 0.65, Val MAE 2.70 *******
+End of epoch 164 / 200 	 Time Taken: 231 sec
+08/08 12:44:25 PM ******* Epoch 165, Train Loss 0.39, Val Loss 7.26, Train MAE 0.63, Val MAE 2.71 *******
+End of epoch 165 / 200 	 Time Taken: 233 sec
+08/08 12:48:18 PM ******* Epoch 166, Train Loss 0.39, Val Loss 7.22, Train MAE 0.64, Val MAE 2.70 *******
+End of epoch 166 / 200 	 Time Taken: 232 sec
+08/08 12:52:10 PM ******* Epoch 167, Train Loss 0.36, Val Loss 7.05, Train MAE 0.61, Val MAE 2.68 *******
+End of epoch 167 / 200 	 Time Taken: 232 sec
+08/08 12:56:03 PM ******* Epoch 168, Train Loss 0.38, Val Loss 6.97, Train MAE 0.62, Val MAE 2.67 *******
+End of epoch 168 / 200 	 Time Taken: 232 sec
+08/08 12:59:56 PM ******* Epoch 169, Train Loss 0.34, Val Loss 7.08, Train MAE 0.59, Val MAE 2.67 *******
+End of epoch 169 / 200 	 Time Taken: 232 sec
+08/08 01:03:49 PM ******* Epoch 170, Train Loss 0.39, Val Loss 7.07, Train MAE 0.63, Val MAE 2.67 *******
+End of epoch 170 / 200 	 Time Taken: 232 sec
+08/08 01:07:43 PM ******* Epoch 171, Train Loss 0.37, Val Loss 7.05, Train MAE 0.61, Val MAE 2.66 *******
+End of epoch 171 / 200 	 Time Taken: 234 sec
+08/08 01:11:38 PM ******* Epoch 172, Train Loss 0.36, Val Loss 7.23, Train MAE 0.61, Val MAE 2.73 *******
+End of epoch 172 / 200 	 Time Taken: 234 sec
+08/08 01:15:33 PM ******* Epoch 173, Train Loss 0.35, Val Loss 7.02, Train MAE 0.60, Val MAE 2.69 *******
+End of epoch 173 / 200 	 Time Taken: 235 sec
+08/08 01:19:29 PM ******* Epoch 174, Train Loss 0.37, Val Loss 7.11, Train MAE 0.61, Val MAE 2.68 *******
+End of epoch 174 / 200 	 Time Taken: 235 sec
+08/08 01:23:20 PM ******* Epoch 175, Train Loss 0.34, Val Loss 7.10, Train MAE 0.58, Val MAE 2.68 *******
+End of epoch 175 / 200 	 Time Taken: 231 sec
+08/08 01:27:16 PM ******* Epoch 176, Train Loss 0.32, Val Loss 7.01, Train MAE 0.57, Val MAE 2.69 *******
+End of epoch 176 / 200 	 Time Taken: 236 sec
+08/08 01:31:11 PM ******* Epoch 177, Train Loss 0.33, Val Loss 7.03, Train MAE 0.58, Val MAE 2.68 *******
+End of epoch 177 / 200 	 Time Taken: 235 sec
+08/08 01:35:07 PM ******* Epoch 178, Train Loss 0.34, Val Loss 7.01, Train MAE 0.59, Val MAE 2.69 *******
+End of epoch 178 / 200 	 Time Taken: 235 sec
+08/08 01:38:59 PM ******* Epoch 179, Train Loss 0.33, Val Loss 7.13, Train MAE 0.59, Val MAE 2.69 *******
+End of epoch 179 / 200 	 Time Taken: 232 sec
+08/08 01:42:55 PM ******* Epoch 180, Train Loss 0.32, Val Loss 7.16, Train MAE 0.58, Val MAE 2.71 *******
+End of epoch 180 / 200 	 Time Taken: 236 sec
+08/08 01:46:48 PM ******* Epoch 181, Train Loss 0.32, Val Loss 7.08, Train MAE 0.57, Val MAE 2.68 *******
+End of epoch 181 / 200 	 Time Taken: 233 sec
+08/08 01:50:43 PM ******* Epoch 182, Train Loss 0.33, Val Loss 7.04, Train MAE 0.58, Val MAE 2.68 *******
+End of epoch 182 / 200 	 Time Taken: 234 sec
+08/08 01:54:40 PM ******* Epoch 183, Train Loss 0.33, Val Loss 7.08, Train MAE 0.57, Val MAE 2.67 *******
+End of epoch 183 / 200 	 Time Taken: 237 sec
+08/08 01:58:36 PM ******* Epoch 184, Train Loss 0.32, Val Loss 7.31, Train MAE 0.58, Val MAE 2.70 *******
+End of epoch 184 / 200 	 Time Taken: 235 sec
+08/08 02:02:28 PM ******* Epoch 185, Train Loss 0.33, Val Loss 7.12, Train MAE 0.56, Val MAE 2.69 *******
+End of epoch 185 / 200 	 Time Taken: 232 sec
+08/08 02:06:24 PM ******* Epoch 186, Train Loss 0.33, Val Loss 7.08, Train MAE 0.57, Val MAE 2.68 *******
+End of epoch 186 / 200 	 Time Taken: 236 sec
+08/08 02:10:19 PM ******* Epoch 187, Train Loss 0.32, Val Loss 7.26, Train MAE 0.56, Val MAE 2.69 *******
+End of epoch 187 / 200 	 Time Taken: 234 sec
+08/08 02:14:12 PM ******* Epoch 188, Train Loss 0.33, Val Loss 7.06, Train MAE 0.57, Val MAE 2.68 *******
+End of epoch 188 / 200 	 Time Taken: 233 sec
+08/08 02:18:03 PM ******* Epoch 189, Train Loss 0.33, Val Loss 7.52, Train MAE 0.57, Val MAE 2.69 *******
+End of epoch 189 / 200 	 Time Taken: 230 sec
+08/08 02:21:55 PM ******* Epoch 190, Train Loss 0.33, Val Loss 7.26, Train MAE 0.58, Val MAE 2.69 *******
+End of epoch 190 / 200 	 Time Taken: 232 sec
+08/08 02:25:51 PM ******* Epoch 191, Train Loss 0.32, Val Loss 7.22, Train MAE 0.57, Val MAE 2.68 *******
+End of epoch 191 / 200 	 Time Taken: 235 sec
+08/08 02:29:43 PM ******* Epoch 192, Train Loss 0.31, Val Loss 7.03, Train MAE 0.55, Val MAE 2.69 *******
+End of epoch 192 / 200 	 Time Taken: 232 sec
+08/08 02:33:36 PM ******* Epoch 193, Train Loss 0.30, Val Loss 7.07, Train MAE 0.55, Val MAE 2.69 *******
+End of epoch 193 / 200 	 Time Taken: 232 sec
+08/08 02:37:29 PM ******* Epoch 194, Train Loss 0.31, Val Loss 7.03, Train MAE 0.55, Val MAE 2.69 *******
+End of epoch 194 / 200 	 Time Taken: 232 sec
+08/08 02:41:22 PM ******* Epoch 195, Train Loss 0.32, Val Loss 7.31, Train MAE 0.57, Val MAE 2.69 *******
+End of epoch 195 / 200 	 Time Taken: 233 sec
+08/08 02:45:14 PM ******* Epoch 196, Train Loss 0.33, Val Loss 7.06, Train MAE 0.57, Val MAE 2.69 *******
+End of epoch 196 / 200 	 Time Taken: 231 sec
+08/08 02:49:09 PM ******* Epoch 197, Train Loss 0.30, Val Loss 7.05, Train MAE 0.54, Val MAE 2.69 *******
+End of epoch 197 / 200 	 Time Taken: 235 sec
+08/08 02:53:01 PM ******* Epoch 198, Train Loss 0.30, Val Loss 7.04, Train MAE 0.54, Val MAE 2.69 *******
+End of epoch 198 / 200 	 Time Taken: 231 sec
+08/08 02:56:53 PM ******* Epoch 199, Train Loss 0.31, Val Loss 7.05, Train MAE 0.56, Val MAE 2.69 *******
+End of epoch 199 / 200 	 Time Taken: 232 sec
+08/08 03:00:48 PM ******* Epoch 200, Train Loss 0.30, Val Loss 7.05, Train MAE 0.55, Val MAE 2.69 *******
+End of epoch 200 / 200 	 Time Taken: 234 sec
+08/08 03:01:09 PM *******Again Last Epoch 200,  Val MAE 2.69, In Test MAE 2.73 *******
+08/08 03:01:18 PM ******* Best Epoch 171, Train MAE 0.61, Val MAE 2.66, In Test MAE 2.73 *******
+**** Exp 0 Finished Training! ****
+Tue Aug  8 15:01:28 CST 2023
